@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SouthDreams — Michael | Developer & Builder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rust: #b5451b;
+      --gold: #c9922a;
+      --gold-light: #e8b84b;
+      --dark: #0e0c0a;
+      --darker: #080604;
+      --surface: #161210;
+      --surface2: #1e1a16;
+      --wood: #2a1f14;
+      --text: #e8ddd0;
+      --text-dim: #8a7a6a;
+      --chain: #3a3028;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--darker);
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    .chain-bar {
+      width: 100%;
+      height: 12px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--chain) 0px, var(--chain) 18px,
+        var(--gold) 18px, var(--gold) 20px,
+        var(--chain) 20px, var(--chain) 38px,
+        var(--rust) 38px, var(--rust) 40px
+      );
+      opacity: 0.7;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,6,4,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--chain);
+      padding: 0 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      height: 60px;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
+    .nav-logo span { color: var(--rust); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 2rem 4rem; position: relative;
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(181,69,27,0.08) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 80% at 20% 80%, rgba(201,146,42,0.06) 0%, transparent 60%), var(--darker);
+      max-width: 1100px; margin: 0 auto; width: 100%;
+    }
+    .hero-tag { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; color: var(--rust); text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards; }
+    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 12vw, 9rem); line-height: 0.9; letter-spacing: 0.04em; color: var(--text); opacity: 0; animation: fadeUp 0.7s ease 0.4s forwards; }
+    .hero h1 .accent { color: var(--gold); }
+    .hero h1 .accent2 { color: var(--rust); }
+    .hero-sub { font-size: 1.3rem; font-weight: 300; font-style: italic; color: var(--text-dim); margin-top: 1.5rem; max-width: 540px; opacity: 0; animation: fadeUp 0.7s ease 0.6s forwards; }
+    .hero-cta { display: flex; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s ease 0.8s forwards; }
+    .btn { font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.85rem 2rem; text-decoration: none; border: 1px solid; transition: all 0.25s; cursor: pointer; display: inline-block; }
+    .btn-primary { background: var(--rust); border-color: var(--rust); color: var(--text); }
+    .btn-primary:hover { background: var(--gold); border-color: var(--gold); color: var(--darker); }
+    .btn-outline { background: transparent; border-color: var(--gold); color: var(--gold); }
+    .btn-outline:hover { background: var(--gold); color: var(--darker); }
+    section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--rust); margin-bottom: 1rem; }
+    h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: 0.06em; line-height: 1; color: var(--text); margin-bottom: 1.5rem; }
+    h2 .gold { color: var(--gold); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2rem; }
+    .about-text p { color: var(--text-dim); margin-bottom: 1.2rem; font-size: 1.05rem; }
+    .about-text p strong { color: var(--gold-light); font-weight: 600; }
+    .about-stats { display: flex; flex-direction: column; gap: 1.5rem; }
+    .stat-item { border-left: 3px solid var(--rust); padding-left: 1.2rem; }
+    .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--gold); line-height: 1; }
+    .stat-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+    .full-surface { background: var(--surface); }
+    .full-dark { background: var(--darker); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5px; margin-top: 3rem; border: 1.5px solid var(--chain); }
+    .service-card { background: var(--surface2); padding: 2.5rem 2rem; transition: background 0.25s; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--gold); transition: height 0.3s ease; }
+    .service-card:hover::before { height: 100%; }
+    .service-card:hover { background: var(--wood); }
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.08em; color: var(--gold-light); margin-bottom: 0.8rem; }
+    .service-card p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
+    .service-tag { display: inline-block; margin-top: 1rem; font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rust); border: 1px solid var(--rust); padding: 0.2rem 0.6rem; }
+    .brands-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+    .brand-card { background: var(--surface); border: 1px solid var(--chain); padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.3s; }
+    .brand-card:hover { border-color: var(--gold); }
+    .brand-card::after { content: attr(data-brand); position: absolute; bottom: -1.5rem; right: -0.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: rgba(201,146,42,0.05); pointer-events: none; line-height: 1; }
+    .brand-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .brand-card.dirty h3 { color: var(--rust); }
+    .brand-card.ink h3 { color: var(--gold); }
+    .brand-card p { font-size: 0.98rem; color: var(--text-dim); }
+    .projects-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 1px; background: var(--chain); }
+    .project-item { background: var(--darker); padding: 2rem 2.5rem; display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: center; transition: background 0.2s; }
+    .project-item:hover { background: var(--wood); }
+    .project-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--chain); line-height: 1; min-width: 3rem; }
+    .project-info h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.08em; color: var(--gold-light); margin-bottom: 0.3rem; }
+    .project-info p { font-size: 0.92rem; color: var(--text-dim); }
+    .project-status { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.8rem; border: 1px solid; white-space: nowrap; }
+    .status-building { color: var(--gold); border-color: var(--gold); }
+    .status-live { color: #4caf7d; border-color: #4caf7d; }
+    .status-concept { color: var(--text-dim); border-color: var(--chain); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .contact-text p { color: var(--text-dim); margin-bottom: 1.5rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; letter-spacing: 0.1em; padding: 1rem 1.2rem; border: 1px solid var(--chain); transition: all 0.25s; }
+    .contact-link:hover { border-color: var(--gold); color: var(--gold-light); background: var(--surface); }
+    .contact-link .link-icon { font-size: 1.3rem; }
+    footer { background: var(--darker); border-top: 1px solid var(--chain); text-align: center; padding: 2.5rem 2rem; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.5rem; }
+    footer p { font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; color: var(--text-dim); text-transform: uppercase; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 700px) {
+      .about-grid, .brands-grid, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .project-item { grid-template-columns: 1fr; gap: 0.8rem; }
+      .project-num { display: none; }
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">South<span>Dreams</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="full-dark">
+  <div class="hero">
+    <p class="hero-tag">// Florida — Builder. Developer. Creator.</p>
+    <h1>SOUTH<br/><span class="accent">DREAMS</span><br/><span class="accent2">BUILDS.</span></h1>
+    <p class="hero-sub">Python automation, simple apps for real people, and tools built from scratch — by someone still learning every single day.</p>
+    <div class="hero-cta">
+      <a href="#services" class="btn btn-primary">See What I Build</a>
+      <a href="https://github.com/southdreams" target="_blank" class="btn btn-outline">GitHub</a>
+    </div>
+  </div>
+</div>
+
+<div class="chain-bar"></div>
+
+<div class="full-dark" id="about">
+  <section>
+    <p class="section-label reveal">// 01 — About</p>
+    <h2 class="reveal">BUILT <span class="gold">DIFFERENT.</span></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm <strong>Michael</strong> — a self-taught developer, maker, and creator based in <strong>Titusville, Florida</strong>. I didn't come up through bootcamps or computer science degrees. I learned by building, breaking things, and figuring it out.</p>
+        <p>Before code, I spent years as a <strong>tattoo artist</strong> — precision work, custom designs, one client at a time. That same attention to craft is what I bring to every script and every app I build now.</p>
+        <p>I build tools for <strong>real people</strong> — not tech bros. Simple, useful, honest software that actually solves problems. If it's not easy to use, it's not done yet.</p>
+        <p>Everything I make lives under the <strong>SouthDreams</strong> umbrella — two brands, one mission: build something that matters.</p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-item"><div class="stat-number">FL</div><div class="stat-label">Titusville, Florida</div></div>
+        <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Self-Taught</div></div>
+        <div class="stat-item"><div class="stat-number">FOSS</div><div class="stat-label">Free & Open Source First</div></div>
+        <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">Still Learning Every Day</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="chain-bar"></div>
+
+<div class="full-surface" id="services">
+  <section>
+    <p class="section-label reveal">// 02 — Services</p>
+    <h2 class="reveal">WHAT I <span class="gold">DO.</span></h2>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-icon">🐍</span>
+        <h3>Python Automation</h3>
+        <p>Custom scripts that save you time. Data scraping, file automation, web bots, workflow tools. You tell me the problem — I build the fix.</p>
+        <span class="service-tag">Available on Fiverr</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🛠️</span>
+        <h3>Simple Apps</h3>
+        <p>Stupidly simple apps for non-technical people. If your grandma can't use it, it needs more work. I build tools people actually want to open.</p>
+        <span class="service-tag">In Development</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🔍</span>
+        <h3>Web Scraping</h3>
+        <p>Need data pulled from the web? Product prices, listings, research data. Clean, structured, delivered in whatever format you need.</p>
+        <span class="service-tag">Available on Fiverr</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">⚙️</span>
+        <h3>Custom Tooling</h3>
+        <p>Got a weird problem nobody has a product for? That's my favorite kind. Let's figure it out together and build something that actually fits.</p>
+        <span class="service-tag">Let's Talk</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="chain-bar"></div>
+
+<div class="full-dark" id="brands">
+  <section>
+    <p class="section-label reveal">// 03 — Brands</p>
+    <h2 class="reveal">TWO BRANDS. <span class="gold">ONE MISSION.</span></h2>
+    <div class="brands-grid">
+      <div class="brand-card dirty reveal" data-brand="DIRTY">
+        <h3>Dirty Road Creations</h3>
+        <p>Fabrication, salvaged tech, and hardware builds. Where software meets the physical world. Built from what's available, made to last.</p>
+      </div>
+      <div class="brand-card ink reveal" data-brand="INK">
+        <h3>Iron & Ink</h3>
+        <p>Art, creative work, and visual design. Years of tattooing taught precision and craft — that eye for detail carries into every creative project.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="chain-bar"></div>
+
+<div class="full-surface" id="projects">
+  <section>
+    <p class="section-label reveal">// 04 — Projects</p>
+    <h2 class="reveal">WHAT I'M <span class="gold">BUILDING.</span></h2>
+    <div class="projects-list reveal">
+      <div class="project-item">
+        <div class="project-num">01</div>
+        <div class="project-info">
+          <h3>My Living Story</h3>
+          <p>An AI-powered autobiography app. Answer questions, tell your story, leave something real behind for the people you love.</p>
+        </div>
+        <span class="project-status status-building">Building</span>
+      </div>
+      <div class="project-item">
+        <div class="project-num">02</div>
+        <div class="project-info">
+          <h3>Present & Echo — Legacy Platform</h3>
+          <p>A grief and memorial space. Virtual memorials, legacy messages, and memory preservation for the people who are gone and the ones still here.</p>
+        </div>
+        <span class="project-status status-concept">Concept</span>
+      </div>
+      <div class="project-item">
+        <div class="project-num">03</div>
+        <div class="project-info">
+          <h3>In The Throws of Addiction</h3>
+          <p>A raw, honest daily journal app. Not a recovery book. No sugarcoating. Just a real tool for real people in real situations.</p>
+        </div>
+        <span class="project-status status-concept">Concept</span>
+      </div>
+      <div class="project-item">
+        <div class="project-num">04</div>
+        <div class="project-info">
+          <h3>Sovereign Agent</h3>
+          <p>A local AI assistant built on open source tools. Runs on your machine, knows your work, no subscriptions required.</p>
+        </div>
+        <span class="project-status status-building">Building</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="chain-bar"></div>
+
+<div class="full-dark" id="contact">
+  <section>
+    <div class="contact-inner">
+      <div class="contact-text reveal">
+        <p class="section-label">// 05 — Contact</p>
+        <h2>LET'S <span class="gold">TALK.</span></h2>
+        <p>Have a project in mind? Need a script built? Want to work together on something? I'm easy to reach and I actually respond.</p>
+        <p>No project is too small. No question is too basic. Let's figure it out.</p>
+        <a href="https://www.fiverr.com" target="_blank" class="btn btn-primary" style="margin-top:1rem;">Hire Me on Fiverr</a>
+      </div>
+      <div class="contact-links reveal">
+        <a href="mailto:southdreams@outlook.com" class="contact-link">
+          <span class="link-icon">✉️</span> southdreams@outlook.com
+        </a>
+        <a href="https://github.com/southdreams" target="_blank" class="contact-link">
+          <span class="link-icon">🐙</span> github.com/southdreams
+        </a>
+        <a href="https://www.fiverr.com" target="_blank" class="contact-link">
+          <span class="link-icon">💼</span> Fiverr — Python & Automation
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="chain-bar"></div>
+
+<footer>
+  <div class="footer-logo">SouthDreams</div>
+  <p>© 2026 SouthDreams — Michael | Titusville, Florida</p>
+  <p style="margin-top:0.4rem;">Dirty Road Creations &nbsp;·&nbsp; Iron & Ink</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
