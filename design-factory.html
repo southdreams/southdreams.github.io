@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Design Factory — SouthDreams</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="factory-styles.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="LOGOS.jpg" alt="SouthDreams"/>
+    <span class="nav-logo-text">South<span>Dreams</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#tools">Tools</a></li>
+    <li><a href="index.html#brands">Brands</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="design-factory.html" class="active">Factory</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-hire">Hire Me</a>
+</nav>
+
+<div class="factory-header">
+  <div class="factory-header-inner reveal">
+    <p class="sec-label">// Iron &amp; Ink · Digital Design Factory · Command Center</p>
+    <h1 class="factory-title">DESIGN <span class="g">FACTORY</span></h1>
+    <p class="factory-subtitle">"Raw inputs. Clean outputs."</p>
+    <div class="stat-strip">
+      <div class="stat-chip">
+        <span class="stat-num" id="statPacks">—</span>
+        <span class="stat-label">Total Packs</span>
+      </div>
+      <div class="stat-chip">
+        <span class="stat-num" id="statAssets">—</span>
+        <span class="stat-label">Total Assets</span>
+      </div>
+      <div class="stat-chip">
+        <span class="stat-num" id="statWorkers">—</span>
+        <span class="stat-label">Workers Online</span>
+      </div>
+      <div class="stat-chip">
+        <span class="stat-num" id="statExports">—</span>
+        <span class="stat-label">Active Exports</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="factory-tabs" id="factoryTabs">
+  <button class="ftab active" data-panel="packs">// Packs</button>
+  <button class="ftab" data-panel="sheet">// Master Sheet</button>
+  <button class="ftab" data-panel="workers">// Workers</button>
+  <button class="ftab" data-panel="exports">// Export Queue</button>
+</div>
+
+<!-- PANEL: PACKS -->
+<div class="panel active" id="panel-packs">
+  <p class="sec-label reveal">// 01 — Asset Packs</p>
+  <h2 class="reveal">FORGE A <span class="g">NEW PACK.</span></h2>
+
+  <div class="forge-form" id="newPackForm">
+    <div class="term-bar">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="term-title">new-pack.sh</span>
+    </div>
+    <div class="forge-body">
+      <div class="field-row">
+        <label class="field-label" for="packName">PACK NAME</label>
+        <input class="forge-input" id="packName" placeholder="e.g. rust-textures-vol1" autocomplete="off"/>
+      </div>
+      <div class="field-row">
+        <label class="field-label" for="packDesc">DESCRIPTION</label>
+        <textarea class="forge-input" id="packDesc" rows="2" placeholder="What's in this pack?"></textarea>
+      </div>
+      <div class="field-row">
+        <span class="field-label">USE CASES (TAGS)</span>
+        <div class="tag-checks">
+          <label class="tag-check"><input type="checkbox" value="pod"/> Print on Demand</label>
+          <label class="tag-check"><input type="checkbox" value="gamedev-godot"/> Godot</label>
+          <label class="tag-check"><input type="checkbox" value="gamedev-unity"/> Unity</label>
+          <label class="tag-check"><input type="checkbox" value="web"/> Web</label>
+          <label class="tag-check"><input type="checkbox" value="social"/> Social Media</label>
+          <label class="tag-check"><input type="checkbox" value="print"/> Print</label>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-fire" id="forgePack" onclick="createPack()">FORGE PACK</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="sec-label reveal" style="margin-bottom:1rem;">// YOUR PACKS</p>
+  <div class="pack-grid" id="packGrid">
+    <div class="skeleton" style="height:200px;grid-column:1/-1;"></div>
+  </div>
+</div>
+
+<!-- PANEL: MASTER SHEET -->
+<div class="panel" id="panel-sheet">
+  <p class="sec-label reveal">// 02 — Master Sheet</p>
+  <h2 class="reveal">VISUAL <span class="g">OVERVIEW.</span></h2>
+  <p class="reveal" style="color:var(--dim);margin-bottom:1.5rem;max-width:580px;">Select a pack to view all assets in a master sheet. Click any asset to see full metadata.</p>
+
+  <div class="sheet-controls">
+    <select class="forge-input" id="sheetPackSelect" style="max-width:360px;" onchange="renderSheetView(this.value)">
+      <option value="">-- Select a pack to view --</option>
+    </select>
+  </div>
+
+  <div class="sheet-grid" id="sheetGrid">
+    <div class="empty-state" style="grid-column:1/-1;">Select a pack above to load the master sheet.</div>
+  </div>
+
+  <div class="asset-drawer" id="assetDrawer">
+  </div>
+</div>
+
+<!-- PANEL: WORKERS -->
+<div class="panel" id="panel-workers">
+  <p class="sec-label reveal">// 03 — Worker Fleet</p>
+  <h2 class="reveal">CONNECTED <span class="g">WORKERS.</span></h2>
+  <p class="reveal" style="color:var(--dim);margin-bottom:1.5rem;max-width:640px;">Register Android phones, WSL2 processes, and desktops as workers. Workers poll for export jobs and process them using FOSS tools (ImageMagick, FFMPEG). Run the heartbeat script on each device to keep status live.</p>
+
+  <div class="forge-form" id="workerForm">
+    <div class="term-bar">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="term-title">register-worker.sh</span>
+    </div>
+    <div class="forge-body">
+      <div class="field-row">
+        <label class="field-label" for="workerName">WORKER NAME</label>
+        <input class="forge-input" id="workerName" placeholder="e.g. samsung-a52-termux" autocomplete="off"/>
+      </div>
+      <div class="field-row">
+        <label class="field-label" for="workerType">WORKER TYPE</label>
+        <select class="forge-input" id="workerType">
+          <option value="android">Android Device (Termux)</option>
+          <option value="wsl2">WSL2 Process (Windows)</option>
+          <option value="desktop">Desktop / Laptop</option>
+        </select>
+      </div>
+      <div>
+        <button class="btn btn-fire" id="registerWorkerBtn" onclick="registerWorker()">REGISTER WORKER</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="sec-label reveal" style="margin-bottom:1rem;">// WORKER STATUS</p>
+  <div class="workers-grid" id="workersGrid">
+    <div class="skeleton" style="height:160px;grid-column:1/-1;"></div>
+  </div>
+
+  <p class="sec-label reveal" style="margin-bottom:1rem;">// ACTIVITY LOG</p>
+  <div class="terminal reveal">
+    <div class="term-bar">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="term-title">worker-log.sh</span>
+    </div>
+    <div class="term-body" id="workerLogBody">
+      <span class="tc">// waiting for worker data...</span>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;" class="reveal">
+    <p class="sec-label" style="margin-bottom:1rem;">// HEARTBEAT SCRIPT (run on each worker)</p>
+    <div class="terminal">
+      <div class="term-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        <span class="term-title">heartbeat.sh</span>
+      </div>
+      <div class="term-body">
+        <span class="tc"># Run this on your Android (Termux) or WSL2/Linux machine</span><br/>
+        <span class="tc"># Replace WORKER_ID with the ID shown in the dashboard above</span><br/><br/>
+        <span class="tg">WORKER_ID</span><span class="tc">=</span><span class="tw">"your-worker-uuid-here"</span><br/>
+        <span class="tg">SUPABASE_URL</span><span class="tc">=</span><span class="tw">"https://ekwruqvjpnbjmzsrgecr.supabase.co"</span><br/>
+        <span class="tg">ANON_KEY</span><span class="tc">=</span><span class="tw">"your-anon-key"</span><br/><br/>
+        <span class="tc">while true; do</span><br/>
+        <span class="tc">&nbsp;&nbsp;curl -sX PATCH "$SUPABASE_URL/rest/v1/workers?id=eq.$WORKER_ID" \</span><br/>
+        <span class="tc">&nbsp;&nbsp;&nbsp;&nbsp;-H "apikey: $ANON_KEY" \</span><br/>
+        <span class="tc">&nbsp;&nbsp;&nbsp;&nbsp;-H "Content-Type: application/json" \</span><br/>
+        <span class="tc">&nbsp;&nbsp;&nbsp;&nbsp;-d "{\"status\":\"online\",\"last_seen\":\"$(date -Iseconds)\"}"</span><br/>
+        <span class="tgreen">&nbsp;&nbsp;echo "[$(date)] Heartbeat sent"</span><br/>
+        <span class="tc">&nbsp;&nbsp;sleep 60</span><br/>
+        <span class="tc">done</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL: EXPORT QUEUE -->
+<div class="panel" id="panel-exports">
+  <p class="sec-label reveal">// 04 — Export Queue</p>
+  <h2 class="reveal">EXPORT <span class="g">PIPELINE.</span></h2>
+  <p class="reveal" style="color:var(--dim);margin-bottom:1.5rem;max-width:640px;">Queue export jobs for any pack. Workers poll for queued jobs and process them using ImageMagick or FFMPEG. Each format spec defines the exact output requirements for its target platform.</p>
+
+  <div class="forge-form" id="exportForm">
+    <div class="term-bar">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="term-title">queue-export.sh</span>
+    </div>
+    <div class="forge-body">
+      <div class="field-row">
+        <label class="field-label" for="exportPackSelect">SELECT PACK</label>
+        <select class="forge-input" id="exportPackSelect">
+          <option value="">-- Select pack --</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <label class="field-label" for="exportFormatSelect">EXPORT FORMAT</label>
+        <select class="forge-input" id="exportFormatSelect"></select>
+      </div>
+      <div>
+        <button class="btn btn-fire" id="queueExportBtn" onclick="createExportJob()">QUEUE EXPORT</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="sec-label reveal" style="margin-bottom:1rem;">// ACTIVE JOBS</p>
+  <div class="export-queue" id="exportQueue">
+    <div class="empty-state">No export jobs yet.</div>
+  </div>
+
+  <p class="sec-label reveal" style="margin-top:2.5rem;margin-bottom:1rem;">// FORMAT SPECS REFERENCE</p>
+  <div id="formatSpecsTable" class="reveal"></div>
+
+  <div style="margin-top:2rem;" class="reveal">
+    <p class="sec-label" style="margin-bottom:1rem;">// WORKER EXPORT SCRIPT</p>
+    <div class="terminal">
+      <div class="term-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        <span class="term-title">worker-export.py</span>
+      </div>
+      <div class="term-body">
+        <span class="tc"># Python worker script — runs on Android (Termux), WSL2, or Linux</span><br/>
+        <span class="tc"># Polls for queued export jobs, processes with ImageMagick, updates status</span><br/><br/>
+        <span class="tr">import</span> <span class="tw">requests, subprocess, time, os</span><br/><br/>
+        <span class="tg">SUPABASE_URL</span> <span class="tc">=</span> <span class="tw">"https://ekwruqvjpnbjmzsrgecr.supabase.co"</span><br/>
+        <span class="tg">HEADERS</span> <span class="tc">= {</span><span class="tw">"apikey"</span><span class="tc">:</span> <span class="tw">"ANON_KEY"</span><span class="tc">,</span> <span class="tw">"Content-Type"</span><span class="tc">:</span> <span class="tw">"application/json"</span><span class="tc">}</span><br/><br/>
+        <span class="tr">def</span> <span class="tgreen">poll_and_process</span><span class="tc">():</span><br/>
+        <span class="tc">&nbsp;&nbsp;r = requests.get(f"{SUPABASE_URL}/rest/v1/export_jobs",</span><br/>
+        <span class="tc">&nbsp;&nbsp;&nbsp;&nbsp;params={"status":"eq.queued","limit":"1"}, headers=HEADERS)</span><br/>
+        <span class="tc">&nbsp;&nbsp;jobs = r.json()</span><br/>
+        <span class="tc">&nbsp;&nbsp;</span><span class="tr">if not</span> <span class="tw">jobs: return</span><br/>
+        <span class="tc">&nbsp;&nbsp;job = jobs[0]</span><br/>
+        <span class="tc">&nbsp;&nbsp;</span><span class="tc"># claim job, process with ImageMagick, update to done/failed</span><br/>
+        <span class="tc">&nbsp;&nbsp;...</span><br/><br/>
+        <span class="tr">while</span> <span class="tw">True</span><span class="tc">:</span><br/>
+        <span class="tc">&nbsp;&nbsp;poll_and_process()</span><br/>
+        <span class="tc">&nbsp;&nbsp;time.sleep(30)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chain-bar"></div>
+
+<footer>
+  <div class="foot-logo">South<span>Dreams</span></div>
+  <p style="color:var(--warm);font-style:italic;font-family:'Barlow',sans-serif;">"We help the ones the world tries to forget."</p>
+  <p>2026 SouthDreams · Titusville, FL</p>
+  <p>Dirty Road Creations · Iron &amp; Ink · Soft Rebel</p>
+  <p>Built with FOSS. No cloud. No VC. Just a builder and a terminal.</p>
+</footer>
+
+<div class="music-bar">
+  <button class="music-btn" id="playBtn" onclick="togglePlay()">&#9654;</button>
+  <div class="music-info">
+    <div class="music-title" id="musicTitle">&#9834; Loading track...</div>
+  </div>
+  <div class="music-progress-wrap" onclick="seekMusic(event)">
+    <div class="music-progress-fill" id="progressFill"></div>
+  </div>
+  <div class="music-vol">
+    <span>VOL</span>
+    <input type="range" min="0" max="1" step="0.05" value="0.5" oninput="setVol(this.value)"/>
+  </div>
+  <span class="music-tag">// FREE · CC LICENSE</span>
+  <audio id="audioPlayer" loop>
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3" type="audio/mpeg"/>
+  </audio>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="factory-app.js"></script>
+<script src="factory-packs.js"></script>
+<script src="factory-workers.js"></script>
+<script src="factory-export.js"></script>
+</body>
+</html>
