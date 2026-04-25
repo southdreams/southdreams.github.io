@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SouthDreams — Built Dirty. Works Clean.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    :root {
+        --bg: #050607;
+        --bg-alt: #0b0d10;
+        --panel: #14171c;
+        --steel: #c4c7cc;
+        --rust: #ff7a2a;
+        --rust-soft: #ffb07a;
+        --line: #262a33;
+        --text-main: #f3f4f6;
+        --text-soft: #a7abb4;
+        --danger: #ff4b4b;
+        --accent-shadow: 0 0 18px rgba(255,122,42,0.35);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top, #151922 0, #050607 55%);
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* Layout */
+
+    header {
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(to bottom, #090b0f, #050607);
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(10px);
+    }
+
+    .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 18px;
+    }
+
+    .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0 10px;
+        gap: 16px;
+    }
+
+    .brand-block {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .brand-title {
+        font-size: 1.1rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--steel);
+    }
+
+    .brand-sub {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        color: var(--text-soft);
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
+    }
+
+    .nav-btn {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        padding: 7px 11px;
+        border-radius: 999px;
+        border: 1px solid #2b303a;
+        background: radial-gradient(circle at top, #1b1f27 0, #0c0f15 55%);
+        color: var(--steel);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: 0.18s ease;
+    }
+
+    .nav-btn span {
+        font-size: 0.7rem;
+        opacity: 0.8;
+    }
+
+    .nav-btn:hover {
+        border-color: var(--rust);
+        color: var(--rust-soft);
+        box-shadow: var(--accent-shadow);
+        transform: translateY(-1px);
+    }
+
+    /* Logo */
+
+    .logo-strip {
+        border-top: 1px solid #181c24;
+        border-bottom: 1px solid #181c24;
+        background: radial-gradient(circle at top, #151922 0, #050607 60%);
+        padding: 22px 0 26px;
+        text-align: center;
+    }
+
+    .logo-strip img {
+        width: 210px;
+        max-width: 60vw;
+        filter: drop-shadow(0 0 22px rgba(0,0,0,0.9));
+    }
+
+    /* Hero */
+
+    .hero {
+        padding: 32px 0 30px;
+        border-bottom: 1px solid var(--line);
+        background: radial-gradient(circle at top, #181d27 0, #050607 65%);
+    }
+
+    .hero-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .hero-tagline {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--rust-soft);
+    }
+
+    .hero-title {
+        font-size: 1.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--steel);
+    }
+
+    .hero-sub {
+        font-size: 0.98rem;
+        color: var(--text-soft);
+        max-width: 520px;
+    }
+
+    .platform-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 6px;
+    }
+
+    .chip {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        padding: 5px 10px;
+        border-radius: 999px;
+        border: 1px solid #2b303a;
+        color: var(--steel);
+        background: #0b0e14;
+    }
+
+    /* CTA */
+
+    .cta-block {
+        margin-top: 10px;
+        padding: 14px 16px;
+        border-radius: 10px;
+        border: 1px solid #3a2a22;
+        background: radial-gradient(circle at top left, rgba(255,122,42,0.16) 0, #0b0d11 55%);
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.7);
+        max-width: 620px;
+    }
+
+    .cta-line-main {
+        font-size: 1.02rem;
+        color: var(--rust-soft);
+        font-weight: 600;
+    }
+
+    .cta-line-sub {
+        font-size: 0.9rem;
+        color: var(--text-soft);
+        margin-top: 4px;
+    }
+
+    /* Action buttons */
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    .btn {
+        border-radius: 999px;
+        padding: 9px 16px;
+        font-size: 0.86rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        border: 1px solid transparent;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: 0.18s ease;
+        text-decoration: none;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--rust) 0, #ffb15a 100%);
+        color: #1a0f08;
+        box-shadow: var(--accent-shadow);
+        border-color: #ffb15a;
+    }
+
+    .btn-primary:hover {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+        background: #0b0e14;
+        border-color: #303543;
+        color: var(--steel);
+    }
+
+    .btn-ghost:hover {
+        border-color: var(--rust);
+        color: var(--rust-soft);
+        box-shadow: var(--accent-shadow);
+        transform: translateY(-1px);
+    }
+
+    .btn-danger {
+        border-color: var(--danger);
+        color: var(--danger);
+        background: #12090b;
+    }
+
+    .btn-danger:hover {
+        background: #1a0c10;
+        box-shadow: 0 0 16px rgba(255,75,75,0.35);
+    }
+
+    /* Sections */
+
+    .section {
+        padding: 32px 0 30px;
+        border-bottom: 1px solid var(--line);
+        background: radial-gradient(circle at top, #141821 0, #050607 70%);
+    }
+
+    .section-alt {
+        background: radial-gradient(circle at top, #10131b 0, #050607 70%);
+    }
+
+    .section-header {
+        margin-bottom: 18px;
+    }
+
+    .section-kicker {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--rust-soft);
+        margin-bottom: 4px;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--steel);
+    }
+
+    .section-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 16px;
+    }
+
+    .card {
+        border-radius: 12px;
+        border: 1px solid #262a33;
+        background: radial-gradient(circle at top left, rgba(255,255,255,0.03) 0, #0b0e14 55%);
+        padding: 14px 14px 13px;
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.7);
+    }
+
+    .card-title {
+        font-size: 0.98rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--rust-soft);
+        margin-bottom: 4px;
+    }
+
+    .card-body {
+        font-size: 0.9rem;
+        color: var(--text-soft);
+    }
+
+    .card-meta {
+        margin-top: 6px;
+        font-size: 0.78rem;
+        color: #8b90a0;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+    }
+
+    /* Store section */
+
+    .store-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .btn-pill-muted {
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        border: 1px dashed #3a3f4c;
+        color: #8f94a3;
+        background: #080a0f;
+        cursor: default;
+    }
+
+    /* Second CTA section */
+
+    .cta-section {
+        padding: 30px 0 32px;
+        border-bottom: 1px solid var(--line);
+        background: radial-gradient(circle at top, #1a1511 0, #050607 70%);
+    }
+
+    .cta-panel {
+        border-radius: 14px;
+        border: 1px solid #3a2a22;
+        background: radial-gradient(circle at top left, rgba(255,122,42,0.22) 0, #0b0d11 55%);
+        box-shadow: var(--accent-shadow);
+        padding: 18px 18px 16px;
+    }
+
+    .cta-panel-title {
+        font-size: 1.1rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--steel);
+        margin-bottom: 6px;
+    }
+
+    .cta-panel-body {
+        font-size: 0.96rem;
+        color: var(--text-main);
+    }
+
+    .cta-panel-sub {
+        font-size: 0.86rem;
+        color: var(--text-soft);
+        margin-top: 4px;
+    }
+
+    /* Mission / ethos */
+
+    .mission {
+        font-size: 0.96rem;
+        color: var(--rust-soft);
+        font-style: italic;
+    }
+
+    /* Footer */
+
+    footer {
+        padding: 26px 0 30px;
+        background: #040507;
+        border-top: 1px solid #181c24;
+        color: var(--text-soft);
+        font-size: 0.82rem;
+    }
+
+    .footer-brand {
+        font-size: 0.9rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--steel);
+        margin-bottom: 6px;
+    }
+
+    .footer-row {
+        margin-top: 6px;
+    }
+
+    .footer-row span {
+        opacity: 0.9;
+    }
+
+    @media (max-width: 720px) {
+        .top-bar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        nav {
+            justify-content: flex-start;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="wrap top-bar">
+        <div class="brand-block">
+            <div class="brand-title">SOUTH DREAMS</div>
+            <div class="brand-sub">Titusville, FL · EST. 2026 · Non‑Conformist Spirit</div>
+        </div>
+        <nav>
+            <a class="nav-btn" href="#contact"><span>Get a Script Built</span></a>
+            <a class="nav-btn" href="https://github.com/southdreams" target="_blank" rel="noopener">
+                <span>GitHub</span>
+            </a>
+            <a class="nav-btn" href="#tools"><span>Free Tools ↓</span></a>
+            <a class="nav-btn" href="#platforms"><span>Android</span></a>
+            <a class="nav-btn" href="#platforms"><span>iPhone</span></a>
+            <a class="nav-btn" href="#platforms"><span>Windows</span></a>
+            <a class="nav-btn" href="#platforms"><span>Linux</span></a>
+            <a class="nav-btn" href="#platforms"><span>macOS</span></a>
+        </nav>
+    </div>
+</header>
+
+<div class="logo-strip">
+    <div class="wrap">
+        <img src="logo.png" alt="SouthDreams Logo">
+    </div>
+</div>
+
+<section class="hero">
+    <div class="wrap hero-inner">
+        <div>
+            <div class="hero-tagline">Real tools for real people.</div>
+            <div class="hero-title">Built Dirty. Works Clean.</div>
+            <p class="hero-sub">
+                Scripts, automations, and small tools for the people the world tries to forget.  
+                If your life runs on duct tape and stubbornness, you’re in the right place.
+            </p>
+        </div>
+
+        <div id="platforms">
+            <div class="platform-row">
+                <div class="chip">Android</div>
+                <div class="chip">iPhone</div>
+                <div class="chip">Windows</div>
+                <div class="chip">Linux</div>
+                <div class="chip">macOS</div>
+            </div>
+        </div>
+
+        <div class="cta-block">
+            <div class="cta-line-main">
+                If something in your life is broken, I’ll build the fix.
+            </div>
+            <div class="cta-line-sub">
+                The world forgets people like us — I don’t.
+            </div>
+        </div>
+
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">
+                Start a build
+            </a>
+            <a class="btn btn-ghost" href="https://www.buymeacoffee.com/southdreams" target="_blank" rel="noopener">
+                Buy me a coffee
+            </a>
+            <a class="btn btn-ghost" href="https://www.fiverr.com/southdreams_hq" target="_blank" rel="noopener">
+                Fiverr gigs
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt" id="services">
+    <div class="wrap">
+        <div class="section-header">
+            <div class="section-kicker">Services</div>
+            <div class="section-title">What I actually build</div>
+        </div>
+
+        <div class="section-grid">
+            <div class="card">
+                <div class="card-title">Python Automation</div>
+                <div class="card-body">
+                    Custom scripts that kill repetitive tasks: file movers, schedulers, auto‑renamers, workflow bots.
+                    You describe the problem — I build the fix.
+                </div>
+                <div class="card-meta">Windows · Linux · Android</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Web Scraping</div>
+                <div class="card-body">
+                    Pull data from the sites you live in: prices, listings, research, competitor info.
+                    Delivered clean in CSV, JSON, or whatever format you actually use.
+                </div>
+                <div class="card-meta">Any platform</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Mobile Scripts</div>
+                <div class="card-body">
+                    Termux scripts for Android, Shortcuts automations for iPhone.  
+                    Your phone should work for you, not the other way around.
+                </div>
+                <div class="card-meta">Android · iPhone</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Desktop Apps</div>
+                <div class="card-body">
+                    Simple GUI tools that anyone can use. One‑click programs, file utilities, launchers.  
+                    If your grandma can’t use it — it’s not done.
+                </div>
+                <div class="card-meta">Windows · Linux · macOS</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">File Utilities</div>
+                <div class="card-body">
+                    Duplicate finders, photo sorters, batch renamers, folder organizers.  
+                    The boring stuff that eats your time — automated in one script.
+                </div>
+                <div class="card-meta">All platforms</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Custom Tooling</div>
+                <div class="card-body">
+                    Got a weird problem nobody has a product for? That’s my favorite kind.  
+                    Tell me what breaks your workflow and I’ll build the fix.
+                </div>
+                <div class="card-meta">Built to fit you</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="tools">
+    <div class="wrap">
+        <div class="section-header">
+            <div class="section-kicker">Browse the store</div>
+            <div class="section-title">Ready‑made tools & gigs</div>
+        </div>
+
+        <p class="card-body" style="max-width:620px;margin-bottom:10px;">
+            Some things start as one‑off builds and turn into tools anyone can use.  
+            When the POD and dropshipping stores are live, they’ll show up here.
+        </p>
+
+        <div class="store-buttons">
+            <span class="btn-pill-muted">POD store — coming soon</span>
+            <span class="btn-pill-muted">Dropshipping store — coming soon</span>
+            <a class="btn btn-ghost" href="https://www.fiverr.com/southdreams_hq" target="_blank" rel="noopener">
+                Fiverr: hire me there
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="wrap">
+        <div class="cta-panel">
+            <div class="cta-panel-title">For the ones the world tries to forget</div>
+            <div class="cta-panel-body">
+                If something in your life is broken, I’ll build the fix.
+            </div>
+            <div class="cta-panel-sub">
+                The world forgets people like us — I don’t.  
+                Tell me what’s failing you, and we’ll design something that actually fits your life.
+            </div>
+            <div class="hero-actions" style="margin-top:14px;">
+                <a class="btn btn-primary" href="#contact">Tell me what’s broken</a>
+                <a class="btn btn-ghost" href="https://www.buymeacoffee.com/southdreams" target="_blank" rel="noopener">
+                    Fuel the builds
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="wrap">
+        <div class="section-header">
+            <div class="section-kicker">Soft Rebel</div>
+            <div class="section-title">Why this exists</div>
+        </div>
+        <p class="mission">
+            “We help the ones the world tries to forget.”
+        </p>
+        <p class="card-body" style="max-width:620px;margin-top:8px;">
+            SouthDreams is for the people who keep everything running with scrap parts, stubbornness, and a little bit of rage.  
+            You don’t need another subscription. You need a tool that does the job and gets out of your way.
+        </p>
+    </div>
+</section>
+
+<section class="section" id="contact">
+    <div class="wrap">
+        <div class="section-header">
+            <div class="section-kicker">Contact</div>
+            <div class="section-title">Get a script built</div>
+        </div>
+        <p class="card-body" style="max-width:620px;margin-bottom:10px;">
+            Tell me what’s breaking, what’s wasting your time, or what you wish your device could do.  
+            I’ll come back with ideas, options, and a build path that fits where you’re at.
+        </p>
+        <p class="card-body" style="font-size:0.86rem;color:var(--text-soft);">
+            For now, reach out through Fiverr or the channels you already know.  
+            A direct contact form will live here later.
+        </p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="https://www.fiverr.com/southdreams_hq" target="_blank" rel="noopener">
+                Contact via Fiverr
+            </a>
+            <a class="btn btn-ghost" href="https://www.buymeacoffee.com/southdreams" target="_blank" rel="noopener">
+                Tip jar / support
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-brand">South Dreams</div>
+        <div class="footer-row">
+            <span>“We help the ones the world tries to forget.”</span>
+        </div>
+        <div class="footer-row">
+            <span>© 2026 SouthDreams · Titusville, FL</span>
+        </div>
+        <div class="footer-row">
+            <span>Dirty Road Creations · Iron &amp; Ink · Soft Rebel</span>
+        </div>
+        <div class="footer-row" style="margin-top:6px;">
+            <span>Built with FOSS. No cloud. No VC. Just a builder and a terminal.</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
