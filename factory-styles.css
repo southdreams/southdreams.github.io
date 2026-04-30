@@ -123,6 +123,8 @@ h2 .r{color:var(--burn2);text-shadow:2px 2px 0 var(--rust);}
 .field-label{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--burn2);}
 .forge-input{background:rgba(20,8,2,.8);border:1px solid var(--aged);color:var(--text);font-family:'Share Tech Mono',monospace;font-size:.82rem;padding:.7rem 1rem;outline:none;transition:border-color .2s;width:100%;resize:vertical;}
 .forge-input:focus{border-color:var(--burn);}
+.prompt-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;}
+.pack-meta{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--warm);margin:0 0 .85rem;}
 .forge-input::placeholder{color:var(--dim);}
 select.forge-input{cursor:pointer;}
 

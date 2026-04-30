@@ -27,9 +27,9 @@
 
 <div class="factory-header">
   <div class="factory-header-inner reveal">
-    <p class="sec-label">// Iron &amp; Ink · Digital Design Factory · Command Center</p>
+    <p class="sec-label">// Iron &amp; Ink · Digital Design Factory · Admin only</p>
     <h1 class="factory-title">DESIGN <span class="g">FACTORY</span></h1>
-    <p class="factory-subtitle">"Raw inputs. Clean outputs."</p>
+    <p class="factory-subtitle">"Internal builder. Only visible to the team, not customers."</p>
     <div class="stat-strip">
       <div class="stat-chip">
         <span class="stat-num" id="statPacks">—</span>
@@ -76,6 +76,37 @@
       <div class="field-row">
         <label class="field-label" for="packDesc">DESCRIPTION</label>
         <textarea class="forge-input" id="packDesc" rows="2" placeholder="What's in this pack?"></textarea>
+      </div>
+      <div class="field-row">
+        <label class="field-label" for="packTheme">THEME / CONCEPT</label>
+        <input class="forge-input" id="packTheme" placeholder="e.g. rusted highway, neon noir, ancient sigils" autocomplete="off"/>
+      </div>
+      <div class="field-row">
+        <label class="field-label" for="packCount">HOW MANY ASSETS</label>
+        <input class="forge-input" id="packCount" type="number" min="1" placeholder="e.g. 12" autocomplete="off"/>
+      </div>
+      <div class="field-row">
+        <span class="field-label">TARGET TYPE</span>
+        <div class="tag-checks">
+          <label class="tag-check"><input type="checkbox" value="stickers"/> Stickers</label>
+          <label class="tag-check"><input type="checkbox" value="pod"/> Print on Demand</label>
+          <label class="tag-check"><input type="checkbox" value="game-assets"/> Game Assets</label>
+          <label class="tag-check"><input type="checkbox" value="vectors"/> Vector Art</label>
+          <label class="tag-check"><input type="checkbox" value="social"/> Social Media</label>
+          <label class="tag-check"><input type="checkbox" value="icons"/> Icons & UI</label>
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="field-label" for="packStyle">VISUAL STYLE</label>
+        <input class="forge-input" id="packStyle" placeholder="e.g. gritty, cinematic, hand-drawn, retro, bold" autocomplete="off"/>
+      </div>
+      <div class="field-row">
+        <label class="field-label" for="promptSuggestion">AI PROMPT SUGGESTION</label>
+        <textarea class="forge-input" id="promptSuggestion" rows="3" readonly placeholder="Generate a prompt from theme, count and target type."></textarea>
+      </div>
+      <div class="field-row prompt-actions">
+        <button class="btn btn-warm" type="button" onclick="generatePackPrompt()">GENERATE PROMPT</button>
+        <button class="btn btn-ghost" type="button" onclick="copyPackPrompt()">COPY PROMPT</button>
       </div>
       <div class="field-row">
         <span class="field-label">USE CASES (TAGS)</span>

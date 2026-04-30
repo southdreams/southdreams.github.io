@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>South Dreams | Custom Image Creator</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: radial-gradient(circle at 20% 10%, rgba(255, 75, 75, .2), transparent 20%), radial-gradient(circle at 80% 0%, rgba(255, 180, 71, .15), transparent 18%), linear-gradient(180deg, #2b0f0d 0%, #140606 100%); color: #f4e7dc; }
+    .creator-shell { width:min(1100px,calc(100% - 32px)); margin: 0 auto; padding: 48px 0 120px; }
+    .creator-card { background: rgba(28, 13, 11, .96); border: 1px solid rgba(255, 179, 71, .16); border-radius: 26px; box-shadow: 0 18px 45px rgba(0,0,0,.45); padding: 36px 40px; }
+    .creator-title { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.8rem, 5vw, 4.8rem); margin:0 0 18px; letter-spacing:.08em; text-transform:uppercase; color:#ffb347; }
+    .creator-subtitle { max-width: 720px; color: #e6c8b0; line-height:1.8; margin-bottom: 2rem; }
+    .creator-form { display:grid; gap:18px; }
+    .form-row { display:flex; flex-direction:column; gap:.35rem; }
+    .form-row label { font-family:'Share Tech Mono',monospace; font-size:.76rem; letter-spacing:.18em; text-transform:uppercase; color:#f3d8b7; }
+    .creator-input, .creator-textarea, .creator-select { width:100%; border:1px solid rgba(255, 179, 71,.18); background:rgba(255,255,255,.05); color:#f4e7dc; padding:14px 16px; border-radius:14px; font-family:'Share Tech Mono',monospace; font-size:.95rem; }
+    .creator-textarea { min-height:140px; resize:vertical; }
+    .creator-row { display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+    .creator-row .btn { min-width:180px; }
+    .creator-note { color:#d8b79b; font-size:.95rem; line-height:1.7; }
+    .creator-output { background:rgba(255,255,255,.03); border:1px solid rgba(255, 179, 71,.12); padding:20px; border-radius:18px; color:#f4f4f1; white-space:pre-wrap; min-height:110px; font-family:'Share Tech Mono',monospace; font-size:.95rem; }
+    .creator-footer { margin-top:2.5rem; display:grid; gap:1rem; color:#d4b993; }
+    .creator-footer a { color:#ffb347; text-decoration:underline; }
+    @media(max-width:820px){ .creator-card { padding: 28px 24px; } .creator-row { flex-direction:column; align-items:stretch; } }
+  </style>
+</head>
+<body>
+  <div class="creator-shell">
+    <div class="creator-card">
+      <h1 class="creator-title">Custom Image Creator</h1>
+      <p class="creator-subtitle">Generate a high-quality prompt for a single image or a small pack. This page is for customer-facing creation: ready-made prompts, payment guidance, and pack concept planning without exposing the internal factory workflow.</p>
+      <div class="creator-form">
+        <div class="form-row">
+          <label for="creatorTheme">Theme / Concept</label>
+          <input id="creatorTheme" class="creator-input" placeholder="e.g. neon highway, weathered sigils, cinematic forest" autocomplete="off" />
+        </div>
+        <div class="form-row">
+          <label for="creatorCount">How many images?</label>
+          <input id="creatorCount" class="creator-input" type="number" min="1" placeholder="e.g. 1 for single image, 8 for a small pack" />
+        </div>
+        <div class="form-row">
+          <label for="creatorTargets">Asset type</label>
+          <select id="creatorTargets" class="creator-select">
+            <option value="stickers">Stickers</option>
+            <option value="pod">Print-on-Demand</option>
+            <option value="game-assets">Game assets</option>
+            <option value="vector-art">Vector art</option>
+            <option value="social">Social media graphics</option>
+            <option value="icons">Icons / UI</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="creatorStyle">Visual style</label>
+          <input id="creatorStyle" class="creator-input" placeholder="e.g. gritty, retro, line-art, bold, painterly" autocomplete="off" />
+        </div>
+        <div class="creator-row">
+          <button class="btn btn-fire" onclick="generateCreatorPrompt()">Generate Prompt</button>
+          <button class="btn btn-ghost" onclick="copyCreatorPrompt()">Copy Prompt</button>
+        </div>
+        <div class="form-row">
+          <label for="creatorPrompt">AI prompt</label>
+          <div id="creatorPrompt" class="creator-output">Use the fields above and click Generate Prompt to see a ready-made AI prompt.</div>
+        </div>
+      </div>
+      <div class="creator-footer">
+        <p class="creator-note">This tool is intended for quick single-image creation. For full pack production, please contact us to purchase a paid custom pack service and get your designs exported to store-ready formats, vector art, and distribution-ready assets.</p>
+        <p class="creator-note">Want us to publish your pack to Gumroad, your own storefront, or a POD catalog? <a href="https://www.buymeacoffee.com/southdreams" target="_blank" rel="noopener">Contact South Dreams</a> and we'll make it happen.</p>
+      </div>
+    </div>
+  </div>
+  <script src="creator.js"></script>
+</body>
+</html>

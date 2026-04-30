@@ -3,6 +3,52 @@ function escHtml(str) {
 }
 window.escHtml = escHtml;
 
+function getPackInputValues() {
+  const theme = document.getElementById('packTheme')?.value.trim() || '';
+  const count = parseInt(document.getElementById('packCount')?.value, 10) || 0;
+  const style = document.getElementById('packStyle')?.value.trim() || '';
+  const targets = Array.from(document.querySelectorAll('#newPackForm .tag-check input:checked')).map(el => el.value);
+  return { theme, count, style, targets };
+}
+window.getPackInputValues = getPackInputValues;
+
+function formatPromptTargets(targets) {
+  if (!targets || targets.length === 0) return 'mixed assets';
+  return targets.map(t => t.replace(/-/g, ' ')).join(', ');
+}
+
+function generatePackPrompt() {
+  const { theme, count, style, targets } = getPackInputValues();
+  if (!theme) { toast('Enter a theme first', 'error'); return ''; }
+  const targetText = formatPromptTargets(targets);
+  const countText = count > 0 ? `${count} image${count === 1 ? '' : 's'}` : 'a set of images';
+  const styleText = style ? `${style}, ` : '';
+  const prompt = `Create ${countText} of ${targetText} with a ${theme} theme. The art should be ${styleText}high-resolution, game-ready, print-ready, and sticker-friendly. Use bold textures, strong silhouettes, and a palette that works for 4K+ assets and vector-friendly layouts.`;
+  const output = document.getElementById('promptSuggestion');
+  if (output) output.value = prompt;
+  toast('AI prompt generated', 'success');
+  return prompt;
+}
+window.generatePackPrompt = generatePackPrompt;
+
+async function copyPackPrompt() {
+  const prompt = document.getElementById('promptSuggestion')?.value || '';
+  if (!prompt) { toast('Generate a prompt first', 'error'); return; }
+  try {
+    await navigator.clipboard.writeText(prompt);
+    toast('Prompt copied to clipboard', 'success');
+  } catch (err) {
+    toast('Copy failed, use manual selection', 'error');
+  }
+}
+window.copyPackPrompt = copyPackPrompt;
+
+function extractMetaField(text, key) {
+  if (!text) return '';
+  const match = text.match(new RegExp(`${key}:\\s*(.+?)(?:\\n|$)`));
+  return match ? match[1].trim() : '';
+}
+
 function formatBytes(bytes) {
   if (!bytes) return '—';
   if (bytes < 1024) return bytes + ' B';
@@ -41,6 +87,7 @@ function renderPackGrid(packs) {
   }
   grid.innerHTML = packs.map(pack => {
     const count = pack.assets?.[0]?.count ?? 0;
+    const theme = extractMetaField(pack.description, 'Theme');
     const tagsHTML = (pack.tags || []).map(t => `<span class="pack-tag">${escHtml(t)}</span>`).join('');
     const statusClass = pack.status === 'active' ? 't-live' : pack.status === 'building' ? 't-build' : 't-soon';
     return `
@@ -50,6 +97,7 @@ function renderPackGrid(packs) {
           <span class="pack-asset-count">${count} asset${count !== 1 ? 's' : ''}</span>
         </div>
         <h3 class="pack-name">${escHtml(pack.name)}</h3>
+        ${theme ? `<p class="pack-meta">Theme: ${escHtml(theme)}</p>` : ''}
         <p class="pack-desc">${escHtml(pack.description || '')}</p>
         <div class="pack-tags">${tagsHTML || '<span style="font-family:\'Share Tech Mono\',monospace;font-size:.6rem;color:var(--dim);">no tags</span>'}</div>
         <div class="pack-actions">
@@ -64,15 +112,27 @@ function renderPackGrid(packs) {
 async function createPack() {
   const name = document.getElementById('packName').value.trim();
   const desc = document.getElementById('packDesc').value.trim();
+  const { theme, count, style, targets } = getPackInputValues();
   const tags = Array.from(document.querySelectorAll('#newPackForm .tag-check input:checked')).map(el => el.value);
 
   if (!name) { toast('Pack name is required', 'error'); return; }
+  if (!theme) { toast('Theme is required', 'error'); return; }
+
+  const prompt = document.getElementById('promptSuggestion').value.trim() || generatePackPrompt();
+  const metaLines = [
+    `Theme: ${theme}`,
+    count ? `Quantity: ${count}` : '',
+    style ? `Style: ${style}` : '',
+    targets.length ? `Targets: ${formatPromptTargets(targets)}` : '',
+    prompt ? `AI prompt: ${prompt}` : '',
+  ].filter(Boolean);
+  const finalDesc = [metaLines.join(' | '), desc].filter(Boolean).join('\n\n');
 
   const btn = document.getElementById('forgePack');
   btn.textContent = 'FORGING...';
   btn.disabled = true;
 
-  const { error } = await db.from('asset_packs').insert({ name, description: desc, tags, status: 'building' });
+  const { error } = await db.from('asset_packs').insert({ name, description: finalDesc, tags, status: 'building' });
 
   btn.textContent = 'FORGE PACK';
   btn.disabled = false;
@@ -81,6 +141,10 @@ async function createPack() {
 
   document.getElementById('packName').value = '';
   document.getElementById('packDesc').value = '';
+  document.getElementById('packTheme').value = '';
+  document.getElementById('packCount').value = '';
+  document.getElementById('packStyle').value = '';
+  document.getElementById('promptSuggestion').value = '';
   document.querySelectorAll('#newPackForm .tag-check input').forEach(el => el.checked = false);
 
   toast('Pack forged: ' + name, 'success');
