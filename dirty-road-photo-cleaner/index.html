@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#c8703a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Photo Cleaner" />
+  <meta name="description" content="Cut the junk from your camera roll. No cloud. No BS. A Dirty Road Creations tool." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Photo Cleaner — Dirty Road Creations</title>
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="app-header">
+    <img src="icons/icon-192.png" alt="Dirty Road Creations logo" />
+    <div class="header-text">
+      <div class="brand">Dirty Road Creations</div>
+      <h1>Photo Cleaner</h1>
+    </div>
+    <button id="install-btn" style="display:none; margin-left:auto; background:var(--rust); border:none; border-radius:8px; color:#fff5e0; font-size:12px; font-weight:600; padding:7px 12px; cursor:pointer;">
+      + Install App
+    </button>
+  </header>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SCREEN 1 — HOME                           -->
+  <!-- ══════════════════════════════════════════ -->
+  <main id="screen-home" class="screen active">
+
+    <div id="scan-area" class="scan-area" role="button" tabindex="0" aria-label="Select photos to scan">
+      <div class="scan-icon">📂</div>
+      <h2>Throw Your Photos In</h2>
+      <p>Tap to pick photos or drop a whole folder.<br>We'll find the junk. <strong>You</strong> decide what goes.</p>
+      <input id="file-input" type="file" accept="image/*,video/*" multiple style="display:none" />
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="num" id="total-count">0</div>
+        <div class="lbl">Photos checked</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="flagged-count">0</div>
+        <div class="lbl">Flagged for review</div>
+      </div>
+    </div>
+
+    <!-- Review All — shown after scan if anything flagged -->
+    <button id="btn-review-all" class="category-btn review-all-btn" style="display:none;">
+      <div class="cat-icon" style="background:#2a1a3a;">🖼</div>
+      <div class="cat-info">
+        <div class="cat-title">Review Everything</div>
+        <div class="cat-sub">Hit 'em all at once in the gallery</div>
+      </div>
+      <span class="cat-count" style="background:var(--rust-dim);">All</span>
+    </button>
+
+    <p class="section-title" style="margin-top:4px;">Or go by category</p>
+
+    <button id="btn-dup" class="category-btn" disabled>
+      <div class="cat-icon" style="background:#3a1a10;">🗂</div>
+      <div class="cat-info">
+        <div class="cat-title">Duplicates</div>
+        <div class="cat-sub">Same shot taking up double the space</div>
+      </div>
+      <span id="dup-count" class="cat-count zero">0</span>
+    </button>
+
+    <button id="btn-blur" class="category-btn" disabled>
+      <div class="cat-icon" style="background:#101a3a;">👁</div>
+      <div class="cat-info">
+        <div class="cat-title">Blurry Shots</div>
+        <div class="cat-sub">Garbage in, garbage out — cut 'em loose</div>
+      </div>
+      <span id="blur-count" class="cat-count zero">0</span>
+    </button>
+
+    <button id="btn-blank" class="category-btn" disabled>
+      <div class="cat-icon" style="background:#0f2a18;">⬛</div>
+      <div class="cat-info">
+        <div class="cat-title">Blank &amp; Dark</div>
+        <div class="cat-sub">Pocket shots, black screens, wasted space</div>
+      </div>
+      <span id="blank-count" class="cat-count zero">0</span>
+    </button>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SCREEN 2 — ONE-BY-ONE REVIEW              -->
+  <!-- ══════════════════════════════════════════ -->
+  <main id="screen-review" class="screen">
+
+    <div class="review-header">
+      <button id="btn-back" class="back-btn">← Back</button>
+      <span id="review-title" class="review-title">Review</span>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span>Progress</span>
+        <span id="progress-text">0 of 0</span>
+      </div>
+      <div class="progress-track">
+        <div id="progress-fill" class="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-preview-wrap">
+        <img id="photo-preview" src="" alt="Photo preview" style="display:none;" />
+        <div id="no-preview" class="no-preview" style="display:none;">📷</div>
+        <span id="flag-badge" class="flag-badge"></span>
+      </div>
+      <div class="photo-meta">
+        <div class="meta-item"><div class="key">Filename</div><div class="val" id="meta-name">—</div></div>
+        <div class="meta-item"><div class="key">Size</div><div class="val" id="meta-size">—</div></div>
+        <div class="meta-item"><div class="key">Date</div><div class="val" id="meta-date">—</div></div>
+      </div>
+      <div class="label-section">
+        <label for="label-input">Tag it before you keep it (optional — e.g. "dad's birthday", "road trip")</label>
+        <input id="label-input" class="label-input" type="text" placeholder="Type a tag…" maxlength="60" />
+      </div>
+      <div class="action-row">
+        <button id="btn-keep" class="btn-keep">✓ Keep It</button>
+        <button id="btn-delete" class="btn-delete">🗑 Kill It</button>
+      </div>
+      <p class="swipe-hint">← Swipe left to kill it · Swipe right to keep it →</p>
+    </div>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SCREEN 3 — GALLERY (all flagged)          -->
+  <!-- ══════════════════════════════════════════ -->
+  <main id="screen-gallery" class="screen">
+
+    <div class="review-header">
+      <button id="btn-gallery-back" class="back-btn">← Back</button>
+      <span class="review-title">🖼 The Flagged Pile</span>
+    </div>
+
+    <div class="gallery-top-bar">
+      <p class="gallery-instructions">
+        Tap a photo to mark it. Tap again to unmark.<br>
+        <strong id="gallery-marked-count">0</strong> marked out of <strong id="gallery-total">0</strong>
+      </p>
+      <button id="btn-select-all" class="btn-select-all">Select All</button>
+    </div>
+
+    <div id="gallery-grid" class="gallery-grid"></div>
+
+    <div class="gallery-footer">
+      <button id="btn-gallery-done" class="btn-primary">Done — nothing marked</button>
+    </div>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SCREEN 4 — DONE                           -->
+  <!-- ══════════════════════════════════════════ -->
+  <main id="screen-done" class="screen">
+    <div class="done-screen">
+      <div class="done-icon">🤠</div>
+      <h2>That's a Wrap, Outlaw</h2>
+      <p>Your hit list is below. Head into your Gallery app and pull the trigger — we never touch your files ourselves.</p>
+
+      <div class="stats-row" style="width:100%; max-width:300px; margin-bottom:24px;">
+        <div class="stat-card">
+          <div class="num" id="done-kept">0</div>
+          <div class="lbl">Survivors</div>
+        </div>
+        <div class="stat-card">
+          <div class="num" id="done-deleted">0</div>
+          <div class="lbl">On the hit list</div>
+        </div>
+      </div>
+
+      <div id="deletion-section" style="width:100%; max-width:360px; text-align:left; margin-bottom:24px;">
+        <p class="section-title" style="margin-bottom:10px;">Finish the job in your Gallery app</p>
+        <ul id="deletion-list" style="list-style:none; background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:10px 14px;"></ul>
+      </div>
+
+      <button id="btn-reset" class="btn-primary">🔄 Run It Again</button>
+    </div>
+  </main>
+
+  <!-- ── SCANNING OVERLAY ── -->
+  <div id="scanning-overlay" class="scanning-overlay">
+    <div class="spinner"></div>
+    <div>
+      <strong>Working through your photos…</strong>
+      <p id="scan-msg">Getting started…</p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
