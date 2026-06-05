@@ -1,206 +1,889 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#c8703a" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Photo Cleaner" />
-  <meta name="description" content="Cut the junk from your camera roll. No cloud. No BS. A Dirty Road Creations tool." />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <link rel="icon" type="image/png" href="icons/icon-192.png" />
-  <link rel="stylesheet" href="style.css" />
-  <title>Photo Cleaner — Dirty Road Creations</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SouthDreams — Built Dirty. Works Clean.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=UnifrakturMaguntia&family=Share+Tech+Mono&family=Barlow:ital,wght@0,300;0,400;0,600;1,300&family=Oswald:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:      #0e0804;
+      --bg2:     #150c06;
+      --bg3:     #1c1008;
+      --red:     #c8321a;
+      --red2:    #e04020;
+      --darkred: #7a1a08;
+      --warm:    #c87830;
+      --gold:    #c8a030;
+      --text:    #e8d8c0;
+      --dim:     #7a6050;
+      --white:   #f5ece0;
+      --border:  #2a1a10;
+      --chain:   #1a1008;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Barlow',sans-serif;
+      font-size:17px;line-height:1.7;
+      overflow-x:hidden;
+      padding-bottom:70px;
+    }
+
+    /* LEATHER TEXTURE */
+    body::before{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:
+        radial-gradient(ellipse 100% 60% at 50% 0%, rgba(180,40,10,.2) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 20% 100%, rgba(120,30,8,.15) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 80% 50%, rgba(100,20,5,.1) 0%, transparent 50%),
+        repeating-linear-gradient(92deg, transparent 0, transparent 3px, rgba(0,0,0,.04) 3px, rgba(0,0,0,.04) 4px),
+        repeating-linear-gradient(178deg, transparent 0, transparent 5px, rgba(180,80,20,.02) 5px, rgba(180,80,20,.02) 6px);
+    }
+    body::after{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+      opacity:.5;
+    }
+
+    nav,.hero-wrap,.sw,footer,.mbar{position:relative;z-index:2;}
+
+    /* ═══ NAV ═══ */
+    nav{
+      background:rgba(8,4,2,.97);
+      border-bottom:2px solid var(--red);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 2.5rem;height:68px;
+      position:sticky;top:0;z-index:200;
+      box-shadow:0 3px 30px rgba(200,50,26,.25);
+    }
+    .nav-brand{display:flex;align-items:center;gap:.9rem;text-decoration:none;}
+    .nav-brand img{
+      height:46px;width:46px;border-radius:50%;object-fit:cover;
+      border:2px solid var(--red);
+      box-shadow:0 0 14px rgba(200,50,26,.7),0 0 30px rgba(200,50,26,.2);
+    }
+    .nav-brand-text{line-height:1.1;}
+    .nav-brand-text .n1{
+      font-family:'Rye',cursive;font-size:1.1rem;
+      color:var(--white);letter-spacing:.06em;display:block;
+    }
+    .nav-brand-text .n2{
+      font-family:'Rye',cursive;font-size:1.1rem;
+      color:var(--red);letter-spacing:.06em;display:block;
+    }
+    .nav-links{display:flex;align-items:center;gap:0;list-style:none;}
+    .nav-skull{color:var(--red);font-size:.9rem;margin:0 .5rem;opacity:.7;}
+    .nav-links a{
+      font-family:'Oswald',sans-serif;font-size:.8rem;
+      letter-spacing:.2em;text-transform:uppercase;
+      color:var(--dim);text-decoration:none;transition:color .2s;
+      padding:.3rem .5rem;
+    }
+    .nav-links a:hover{color:var(--white);}
+    .nav-btn{
+      font-family:'Oswald',sans-serif;font-size:.75rem;
+      letter-spacing:.2em;text-transform:uppercase;
+      padding:.5rem 1.5rem;
+      background:transparent;border:2px solid var(--red);
+      color:var(--red);text-decoration:none;transition:all .2s;
+    }
+    .nav-btn:hover{background:var(--red);color:var(--white);}
+
+    /* ═══ CHAIN BAR ═══ */
+    .chain{
+      position:relative;z-index:2;height:14px;
+      background:repeating-linear-gradient(90deg,
+        #0a0602 0,#0a0602 10px,
+        var(--warm) 10px,var(--warm) 12px,
+        #0a0602 12px,#0a0602 22px,
+        var(--red) 22px,var(--red) 24px);
+      border-top:1px solid #2a1408;border-bottom:1px solid #2a1408;
+      opacity:.75;
+    }
+
+    /* ═══ HERO ═══ */
+    .hero-wrap{
+      min-height:100vh;
+      display:flex;flex-direction:column;align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:6rem 2rem 5rem;
+      background:
+        radial-gradient(ellipse 100% 80% at 50% 30%, rgba(180,40,10,.18) 0%, transparent 60%);
+    }
+
+    /* HUGE LOGO */
+    .logo-container{
+      position:relative;
+      width:min(400px,85vw);height:min(400px,85vw);
+      margin:0 auto 2rem;
+      opacity:0;animation:fadeIn .8s ease .1s forwards;
+    }
+    .logo-outer-ring{
+      position:absolute;inset:-10px;border-radius:50%;
+      background:conic-gradient(
+        var(--red) 0deg, var(--warm) 40deg, var(--gold) 80deg,
+        var(--darkred) 140deg, var(--red) 200deg,
+        var(--warm) 260deg, var(--red) 320deg, var(--red) 360deg
+      );
+      animation:rotatering 8s linear infinite;
+    }
+    .logo-inner-ring{
+      position:absolute;inset:-3px;border-radius:50%;
+      background:conic-gradient(
+        var(--darkred) 0deg,#0e0804 60deg,var(--red) 120deg,
+        #0e0804 180deg,var(--darkred) 240deg,#0e0804 300deg,var(--darkred) 360deg
+      );
+      animation:rotatering 8s linear infinite reverse;
+    }
+    @keyframes rotatering{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    .logo-bg{
+      position:absolute;inset:6px;border-radius:50%;
+      background:var(--bg);
+    }
+    .logo-img{
+      position:absolute;inset:10px;
+      width:calc(100% - 20px);height:calc(100% - 20px);
+      border-radius:50%;object-fit:cover;z-index:1;
+      animation:logoglow 2.5s ease-in-out infinite;
+    }
+    @keyframes logoglow{
+      0%,100%{box-shadow:0 0 40px rgba(200,50,26,.6),0 0 80px rgba(200,50,26,.2);}
+      50%{box-shadow:0 0 80px rgba(200,50,26,.9),0 0 140px rgba(200,50,26,.35);}
+    }
+    @keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+
+    /* HERO TEXT */
+    .hero-location{
+      font-family:'Oswald',sans-serif;font-size:.8rem;
+      letter-spacing:.4em;text-transform:uppercase;
+      color:var(--red);margin-bottom:1.5rem;
+      display:flex;align-items:center;justify-content:center;gap:.8rem;
+      opacity:0;animation:up .6s ease .4s forwards;
+    }
+    .hero-location span{opacity:.5;}
+
+    .hero-title{
+      opacity:0;animation:up .7s ease .55s forwards;
+      margin-bottom:.5rem;
+    }
+    .hero-title .t1{
+      font-family:'Rye',cursive;
+      font-size:clamp(3.5rem,12vw,8rem);
+      color:var(--white);
+      display:block;line-height:1;
+      text-shadow:3px 3px 0 rgba(0,0,0,.5),0 0 40px rgba(200,50,26,.2);
+    }
+    .hero-title .t2{
+      font-family:'Rye',cursive;
+      font-size:clamp(3.5rem,12vw,8rem);
+      color:var(--red);
+      display:block;line-height:1;
+      text-shadow:3px 3px 0 rgba(0,0,0,.5),0 0 40px rgba(200,50,26,.5);
+    }
+
+    .hero-tagstrip{
+      font-family:'Oswald',sans-serif;font-size:.78rem;
+      letter-spacing:.28em;text-transform:uppercase;
+      color:var(--dim);margin:1rem 0 1.5rem;
+      display:flex;align-items:center;justify-content:center;gap:.6rem;
+      opacity:0;animation:up .6s ease .75s forwards;
+    }
+    .hero-tagstrip span{color:var(--red);font-size:.6rem;}
+
+    .hero-desc{
+      font-size:1.1rem;font-weight:300;color:var(--dim);
+      max-width:580px;margin:0 auto 2rem;
+      opacity:0;animation:up .6s ease .9s forwards;
+    }
+    .hero-desc strong{color:var(--text);}
+
+    .hero-btns{
+      display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;
+      margin-bottom:1.5rem;
+      opacity:0;animation:up .6s ease 1.05s forwards;
+    }
+
+    .btn{
+      font-family:'Oswald',sans-serif;font-size:.8rem;
+      letter-spacing:.2em;text-transform:uppercase;
+      padding:.85rem 2.2rem;text-decoration:none;
+      border:2px solid;transition:all .22s;display:inline-block;
+    }
+    .btn-red{background:var(--red);border-color:var(--red);color:var(--white);box-shadow:0 0 20px rgba(200,50,26,.4);}
+    .btn-red:hover{background:var(--red2);box-shadow:0 0 35px rgba(200,50,26,.7);}
+    .btn-outline{background:transparent;border-color:var(--warm);color:var(--warm);}
+    .btn-outline:hover{background:var(--warm);color:var(--bg);}
+    .btn-ghost{background:transparent;border-color:var(--border);color:var(--dim);}
+    .btn-ghost:hover{border-color:var(--dim);color:var(--text);}
+
+    .badges{
+      display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;
+      opacity:0;animation:up .6s ease 1.2s forwards;
+    }
+    .badge{
+      font-family:'Share Tech Mono',monospace;font-size:.58rem;
+      letter-spacing:.1em;text-transform:uppercase;
+      padding:.22rem .75rem;border:1px solid var(--darkred);
+      color:var(--red);background:rgba(200,50,26,.08);
+    }
+
+    /* ═══ SECTIONS ═══ */
+    .sw{background:rgba(12,6,2,.8);backdrop-filter:blur(3px);}
+    .sw.alt{background:rgba(20,10,4,.75);}
+    section{max-width:1200px;margin:0 auto;padding:5rem 2.5rem;}
+    .sec-tag{
+      font-family:'Oswald',sans-serif;font-size:.72rem;
+      letter-spacing:.35em;text-transform:uppercase;
+      color:var(--red);margin-bottom:.6rem;
+      display:flex;align-items:center;gap:.8rem;
+    }
+    .sec-tag::before,.sec-tag::after{content:'☠';font-size:.7rem;opacity:.6;}
+    h2{
+      font-family:'Rye',cursive;
+      font-size:clamp(2.2rem,5vw,4rem);
+      color:var(--white);margin-bottom:2rem;
+      text-shadow:2px 2px 0 rgba(0,0,0,.4);
+      line-height:1.1;
+    }
+    h2 .r{color:var(--red);}
+    h2 .g{color:var(--warm);}
+
+    /* TEAM */
+    .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:2px solid var(--border);margin-top:2.5rem;}
+    .tcard{background:rgba(12,6,2,.97);padding:2.5rem;position:relative;overflow:hidden;transition:background .25s;}
+    .tcard:hover{background:rgba(22,11,4,.97);}
+    .tcard-role{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;}
+    .tcard h3{font-family:'Rye',cursive;font-size:1.8rem;margin-bottom:.8rem;text-shadow:1px 1px 0 rgba(0,0,0,.4);}
+    .tc1 h3{color:var(--warm);}
+    .tc2 h3{color:var(--red);}
+    .tcard p{font-size:.95rem;color:var(--dim);line-height:1.7;}
+    .tcard-quote{margin-top:.8rem;font-style:italic;font-size:.9rem;}
+    .tc1 .tcard-quote{color:var(--warm);}
+    .tc2 .tcard-quote{color:var(--red);}
+    .tcard-wm{position:absolute;bottom:-2rem;right:-.5rem;font-family:'Rye',cursive;font-size:6rem;opacity:.03;color:var(--white);pointer-events:none;line-height:1;}
+
+    /* SERVICES */
+    .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;background:var(--border);border:2px solid var(--border);margin-top:2.5rem;}
+    .svc{background:rgba(12,6,2,.97);padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:background .25s;}
+    .svc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);transform:scaleX(0);transition:transform .3s;}
+    .svc:hover{background:rgba(22,11,4,.97);}
+    .svc:hover::after{transform:scaleX(1);}
+    .svc-icon{font-size:2rem;margin-bottom:.8rem;display:block;}
+    .svc h3{font-family:'Oswald',sans-serif;font-size:1.3rem;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);margin-bottom:.5rem;}
+    .svc p{font-size:.9rem;color:var(--dim);line-height:1.6;}
+    .svc-tag{display:inline-block;margin-top:.8rem;font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .6rem;border:1px solid var(--darkred);color:var(--red);background:rgba(200,50,26,.08);}
+    .svc-plats{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.7rem;}
+    .plat{font-family:'Share Tech Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .5rem;border:1px solid var(--border);color:var(--dim);}
+
+    /* FREE VS PAID */
+    .fvp{margin-top:2.5rem;border:2px solid var(--darkred);padding:2.5rem;background:rgba(120,26,8,.08);display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+    .fvp-col h3{font-family:'Oswald',sans-serif;font-size:1.5rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;}
+    .fvp-col.free h3{color:var(--warm);}
+    .fvp-col.paid h3{color:var(--red);}
+    .fvp-col p{font-size:.9rem;color:var(--dim);margin-bottom:.8rem;}
+    .fvp-col ul{list-style:none;}
+    .fvp-col ul li{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.07em;color:var(--text);padding:.3rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;}
+    .free ul li::before{content:'✓';color:var(--warm);}
+    .paid ul li::before{content:'→';color:var(--red);}
+
+    /* TOOLS */
+    .tools{display:flex;flex-direction:column;gap:2px;background:var(--border);border:2px solid var(--border);margin-top:2.5rem;}
+    .tool{background:rgba(12,6,2,.97);display:grid;grid-template-columns:2.5rem 1fr auto;gap:1.5rem;align-items:center;padding:1.6rem 2rem;text-decoration:none;color:inherit;border-left:3px solid transparent;transition:all .2s;}
+    .tool:hover{background:rgba(22,11,4,.97);border-left-color:var(--red);}
+    .tool-n{font-family:'Rye',cursive;font-size:1.8rem;color:var(--border);line-height:1;}
+    .tool-info h3{font-family:'Oswald',sans-serif;font-size:1.1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);margin-bottom:.2rem;}
+    .tool-info p{font-size:.87rem;color:var(--dim);}
+    .ttag{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .7rem;border:1px solid;white-space:nowrap;}
+    .live{color:#7dcc90;border-color:#7dcc90;}
+    .build{color:var(--warm);border-color:var(--warm);}
+    .soon{color:var(--dim);border-color:var(--border);}
+
+    /* TERMINAL */
+    .terminal{background:rgba(4,2,0,.98);border:2px solid var(--border);margin-top:2.5rem;overflow:hidden;}
+    .tbar{background:var(--bg3);padding:.65rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border);}
+    .dot{width:10px;height:10px;border-radius:50%;}
+    .dr{background:#ff5f57;}.dy{background:#febc2e;}.dg{background:#28c840;}
+    .ttitle{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;margin-left:.4rem;}
+    .tbody{padding:1.8rem 2rem;font-family:'Share Tech Mono',monospace;font-size:.8rem;line-height:2.2;}
+    .tc{color:var(--dim);}.tg{color:var(--warm);}.tr2{color:var(--red);}.tw{color:var(--text);}.tgreen{color:#7dcc90;}
+
+    /* BRANDS */
+    .brands{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:2px solid var(--border);margin-top:2.5rem;}
+    .brand{background:rgba(12,6,2,.97);padding:2.2rem;position:relative;overflow:hidden;transition:background .25s;}
+    .brand:hover{background:rgba(22,11,4,.97);}
+    .brand-wm{position:absolute;bottom:-1.5rem;right:0;font-family:'Rye',cursive;font-size:4.5rem;opacity:.04;pointer-events:none;color:var(--white);line-height:1;}
+    .brand h3{font-family:'Rye',cursive;font-size:1.5rem;margin-bottom:.4rem;text-shadow:1px 1px 0 rgba(0,0,0,.3);}
+    .b1 h3{color:var(--red);}
+    .b2 h3{color:var(--warm);}
+    .b3 h3{color:#c87898;}
+    .brand-mail{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--red);text-decoration:none;display:block;margin-bottom:.6rem;}
+    .brand-mail:hover{color:var(--warm);}
+    .brand p{font-size:.9rem;color:var(--dim);}
+    .brand-vibe{margin-top:.6rem;font-family:'Oswald',sans-serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-style:italic;}
+
+    /* GALLERY */
+    .gal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:4px;margin-top:2.5rem;}
+    .gal-item{aspect-ratio:1;overflow:hidden;position:relative;border:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:center;transition:border-color .3s;}
+    .gal-item:hover{border-color:var(--red);}
+    .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+    .gal-item:hover img{transform:scale(1.06);}
+    .gal-ph{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--border);text-align:center;padding:1rem;}
+
+    /* EXPLORE */
+    .explore{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:var(--border);border:2px solid var(--border);margin-top:2.5rem;}
+    .exp-card{background:rgba(12,6,2,.97);padding:2rem;text-decoration:none;color:inherit;transition:background .2s;border-left:3px solid transparent;}
+    .exp-card:hover{background:rgba(22,11,4,.97);border-left-color:var(--red);}
+    .exp-icon{font-size:2rem;margin-bottom:.6rem;display:block;}
+    .exp-title{font-family:'Oswald',sans-serif;font-size:1.2rem;letter-spacing:.12em;text-transform:uppercase;color:var(--warm);margin-bottom:.4rem;}
+    .exp-desc{font-size:.87rem;color:var(--dim);}
+    .exp-go{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-top:.5rem;display:block;}
+
+    /* CONTACT */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+    .contact-left p{color:var(--dim);margin-bottom:.8rem;font-size:.97rem;}
+    .emails{display:flex;flex-direction:column;gap:.5rem;margin-top:1.2rem;}
+    .elink{display:flex;align-items:center;gap:.8rem;text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.1em;padding:.85rem 1.2rem;border:1px solid var(--border);color:var(--dim);transition:all .2s;}
+    .elink:hover{border-color:var(--warm);color:var(--warm);background:rgba(200,120,48,.06);}
+    .ebrand{color:var(--red);margin-right:.2rem;}
+    .hire{border:2px solid var(--red);padding:2.5rem;background:linear-gradient(135deg,rgba(200,50,26,.1) 0%,rgba(12,6,2,.97) 60%);box-shadow:0 0 30px rgba(200,50,26,.12);}
+    .hire h3{font-family:'Rye',cursive;font-size:1.8rem;color:var(--white);margin-bottom:.8rem;text-shadow:2px 2px 0 rgba(0,0,0,.4);}
+    .hire p{font-size:.9rem;color:var(--dim);margin-bottom:1rem;}
+    .hlist{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.5rem;}
+    .hi{font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--text);display:flex;align-items:center;gap:.5rem;}
+    .hi::before{content:'→';color:var(--red);}
+
+    /* FOOTER */
+    footer{background:rgba(4,2,0,.99);border-top:3px solid var(--red);padding:3.5rem 2.5rem;display:flex;flex-direction:column;align-items:center;gap:.8rem;text-align:center;}
+    .foot-skull{font-size:1.5rem;margin-bottom:.3rem;opacity:.5;}
+    .foot-title .f1{font-family:'Rye',cursive;font-size:2.8rem;color:var(--white);display:block;line-height:1;text-shadow:2px 2px 0 rgba(0,0,0,.4);}
+    .foot-title .f2{font-family:'Rye',cursive;font-size:2.8rem;color:var(--red);display:block;line-height:1;text-shadow:2px 2px 0 rgba(0,0,0,.4);}
+    .foot-tag{font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--warm);font-style:italic;margin:.3rem 0;}
+    footer p{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
+    .foot-div{color:var(--red);font-size:.7rem;opacity:.5;}
+
+
+    /* SOFT REBEL STORE */
+    .sr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:var(--border);border:2px solid var(--border);}
+    .sr-card{background:rgba(12,6,2,.97);transition:background .25s;overflow:hidden;}
+    .sr-card:hover{background:rgba(22,11,4,.97);}
+    .sr-img{aspect-ratio:1;background:rgba(200,120,152,.06);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
+    .sr-img img{width:100%;height:100%;object-fit:cover;}
+    .sr-ph{font-size:3.5rem;opacity:.3;}
+    .sr-info{padding:1.5rem;}
+    .sr-tag{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#c87898;border:1px solid #c87898;display:inline-block;padding:.18rem .55rem;margin-bottom:.6rem;background:rgba(200,120,152,.08);}
+    .sr-info h3{font-family:'Rye',cursive;font-size:1.2rem;color:var(--white);margin-bottom:.4rem;}
+    .sr-info p{font-size:.88rem;color:var(--dim);}
+    .sr-cta-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;background:linear-gradient(135deg,rgba(200,120,152,.08) 0%,rgba(12,6,2,.97) 60%) !important;}
+    .sr-ph-big{font-size:4rem;margin-bottom:1rem;}
+    .sr-cta-card h3{font-family:'Rye',cursive;font-size:1.5rem;color:#c87898;margin-bottom:.6rem;}
+    .sr-cta-card p{font-size:.9rem;color:var(--dim);max-width:240px;}
+    .btn-pink{background:transparent;border-color:#c87898;color:#c87898;}
+    .btn-pink:hover{background:#c87898;color:var(--bg);}
+
+    /* MUSIC */
+    .mbar{position:fixed;bottom:0;left:0;right:0;z-index:500;background:rgba(4,2,0,.98);border-top:2px solid var(--red);padding:.6rem 1.5rem;display:flex;align-items:center;gap:1rem;height:58px;box-shadow:0 -4px 20px rgba(200,50,26,.15);}
+    .mbtn{background:var(--red);border:none;color:var(--white);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:.9rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+    .mbtn:hover{background:var(--red2);}
+    .mtitle{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:var(--warm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;}
+    .mprog{flex:1;height:3px;background:var(--border);cursor:pointer;border-radius:2px;max-width:260px;}
+    .mfill{height:100%;background:linear-gradient(90deg,var(--red),var(--warm));border-radius:2px;width:0%;}
+    .mvol{display:flex;align-items:center;gap:.4rem;}
+    .mvol span{font-family:'Share Tech Mono',monospace;font-size:.55rem;color:var(--dim);}
+    .mvol input{width:55px;accent-color:var(--red);}
+    .mcc{font-family:'Share Tech Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;}
+
+    /* ANIM */
+    @keyframes up{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease;}
+    .reveal.on{opacity:1;transform:none;}
+
+    /* MOBILE */
+    @media(max-width:768px){
+      .team-grid,.brands,.contact-grid,.fvp{grid-template-columns:1fr;}
+      .nav-links,.nav-btn{display:none;}
+      .tool{grid-template-columns:1fr auto;}
+      .tool-n{display:none;}
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ── HEADER ── -->
-  <header class="app-header">
-    <img src="icons/icon-192.png" alt="Dirty Road Creations logo" />
-    <div class="header-text">
-      <div class="brand">Dirty Road Creations</div>
-      <h1>Photo Cleaner</h1>
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-brand">
+    <img src="logo.png" alt="SouthDreams"/>
+    <div class="nav-brand-text">
+      <span class="n1">South</span>
+      <span class="n2">Dreams</span>
     </div>
-    <button id="install-btn" style="display:none; margin-left:auto; background:var(--rust); border:none; border-radius:8px; color:#fff5e0; font-size:12px; font-weight:600; padding:7px 12px; cursor:pointer;">
-      + Install App
-    </button>
-  </header>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#team">About</a></li>
+    <li><span class="nav-skull">☠</span></li>
+    <li><a href="#services">Services</a></li>
+    <li><span class="nav-skull">☠</span></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><span class="nav-skull">☠</span></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><span class="nav-skull">☠</span></li>
+    <li><a href="#store">Store</a></li>
+    <li><span class="nav-skull">☠</span></li>
+    <li><a href="#pages">Explore</a></li>
+    <li><span class="nav-skull">☠</span></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-btn">Hire Me</a>
+</nav>
 
-  <!-- ══════════════════════════════════════════ -->
-  <!-- SCREEN 1 — HOME                           -->
-  <!-- ══════════════════════════════════════════ -->
-  <main id="screen-home" class="screen active">
+<!-- HERO -->
+<div class="hero-wrap" id="home">
+  <div class="logo-container">
+    <div class="logo-outer-ring"></div>
+    <div class="logo-inner-ring"></div>
+    <div class="logo-bg"></div>
+    <img class="logo-img" src="logo.png" alt="SouthDreams"/>
+  </div>
 
-    <div id="scan-area" class="scan-area" role="button" tabindex="0" aria-label="Select photos to scan">
-      <div class="scan-icon">📂</div>
-      <h2>Throw Your Photos In</h2>
-      <p>Tap to pick photos or drop a whole folder.<br>We'll find the junk. <strong>You</strong> decide what goes.</p>
-      <input id="file-input" type="file" accept="image/*,video/*" multiple style="display:none" />
+  <p class="hero-location">
+    <span>☠</span> Titusville, Florida <span>·</span> Est. 2026 <span>☠</span>
+  </p>
+
+  <div class="hero-title">
+    <span class="t1">South</span>
+    <span class="t2">Dreams</span>
+  </div>
+
+  <div class="hero-tagstrip">
+    <span>☠</span> FOSS <span>·</span> Salvaged Tech <span>·</span> Non-Conformist Spirit <span>☠</span>
+  </div>
+
+  <p class="hero-desc">
+    <strong>Real tools for real people.</strong> Custom Python scripts and apps for
+    <strong>Android, iPhone, Windows & Linux.</strong>
+    Built dirty. Works clean.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#contact" class="btn btn-red">Hire Me Now</a>
+    <a href="#tools" class="btn btn-outline">Free Tools</a>
+    <a href="https://https://github.com/southdreams" target="_blank" class="btn btn-ghost">GitHub</a>
+  </div>
+
+  <div class="badges">
+    <span class="badge">🤖 Android</span>
+    <span class="badge">🍎 iPhone</span>
+    <span class="badge">🪟 Windows</span>
+    <span class="badge">🐧 Linux</span>
+    <span class="badge">🍎 macOS</span>
+  </div>
+</div>
+
+<div class="chain"></div>
+
+<!-- TEAM -->
+<div class="sw" id="team">
+<section>
+  <p class="sec-tag">01 — The People</p>
+  <h2>Who We <span class="r">Are.</span></h2>
+  <div class="team-grid">
+    <div class="tcard tc1 reveal">
+      <p class="tcard-role">// Founder · Developer · Builder</p>
+      <h3>Michael Tietsworth</h3>
+      <p>Self-taught developer and maker. Former tattoo artist turned coder. I build real tools for real people — simple, honest, useful. If it doesn't work for your grandma, it's not done.</p>
+      <p class="tcard-quote">"If the tool doesn't work, we build a bigger one."</p>
+      <div class="tcard-wm">M</div>
     </div>
-
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="num" id="total-count">0</div>
-        <div class="lbl">Photos checked</div>
-      </div>
-      <div class="stat-card">
-        <div class="num" id="flagged-count">0</div>
-        <div class="lbl">Flagged for review</div>
-      </div>
+    <div class="tcard tc2 reveal">
+      <p class="tcard-role">// Co-Owner · Co-Conspirator · Operator of Soft Rebel</p>
+      <h3>Ashley Wagoner</h3>
+      <p>Heart of the operation and the driving force behind Soft Rebel. Ashley runs the community side of SouthDreams — making sure we never forget who we're really building for.</p>
+      <p class="tcard-quote">"We help the ones the world tries to forget."</p>
+      <div class="tcard-wm">A</div>
     </div>
+  </div>
+</section>
+</div>
 
-    <!-- Review All — shown after scan if anything flagged -->
-    <button id="btn-review-all" class="category-btn review-all-btn" style="display:none;">
-      <div class="cat-icon" style="background:#2a1a3a;">🖼</div>
-      <div class="cat-info">
-        <div class="cat-title">Review Everything</div>
-        <div class="cat-sub">Hit 'em all at once in the gallery</div>
-      </div>
-      <span class="cat-count" style="background:var(--rust-dim);">All</span>
-    </button>
+<div class="chain"></div>
 
-    <p class="section-title" style="margin-top:4px;">Or go by category</p>
+<!-- SERVICES -->
+<div class="sw alt" id="services">
+<section>
+  <p class="sec-tag">02 — Services</p>
+  <h2>What I Build <span class="r">For You.</span></h2>
 
-    <button id="btn-dup" class="category-btn" disabled>
-      <div class="cat-icon" style="background:#3a1a10;">🗂</div>
-      <div class="cat-info">
-        <div class="cat-title">Duplicates</div>
-        <div class="cat-sub">Same shot taking up double the space</div>
-      </div>
-      <span id="dup-count" class="cat-count zero">0</span>
-    </button>
-
-    <button id="btn-blur" class="category-btn" disabled>
-      <div class="cat-icon" style="background:#101a3a;">👁</div>
-      <div class="cat-info">
-        <div class="cat-title">Blurry Shots</div>
-        <div class="cat-sub">Garbage in, garbage out — cut 'em loose</div>
-      </div>
-      <span id="blur-count" class="cat-count zero">0</span>
-    </button>
-
-    <button id="btn-blank" class="category-btn" disabled>
-      <div class="cat-icon" style="background:#0f2a18;">⬛</div>
-      <div class="cat-info">
-        <div class="cat-title">Blank &amp; Dark</div>
-        <div class="cat-sub">Pocket shots, black screens, wasted space</div>
-      </div>
-      <span id="blank-count" class="cat-count zero">0</span>
-    </button>
-
-  </main>
-
-  <!-- ══════════════════════════════════════════ -->
-  <!-- SCREEN 2 — ONE-BY-ONE REVIEW              -->
-  <!-- ══════════════════════════════════════════ -->
-  <main id="screen-review" class="screen">
-
-    <div class="review-header">
-      <button id="btn-back" class="back-btn">← Back</button>
-      <span id="review-title" class="review-title">Review</span>
+  <div class="fvp reveal">
+    <div class="fvp-col free">
+      <h3>Free Tools</h3>
+      <p>Open source tools already built. Download, use, keep. No charge. Ever.</p>
+      <ul>
+        <li>Dirty Road Deduper</li>
+        <li>Photo Sorter</li>
+        <li>SouthDreams Toolkit</li>
+        <li>Everything on GitHub</li>
+      </ul>
     </div>
-
-    <div class="progress-wrap">
-      <div class="progress-meta">
-        <span>Progress</span>
-        <span id="progress-text">0 of 0</span>
-      </div>
-      <div class="progress-track">
-        <div id="progress-fill" class="progress-fill" style="width:0%"></div>
-      </div>
-    </div>
-
-    <div class="photo-card">
-      <div class="photo-preview-wrap">
-        <img id="photo-preview" src="" alt="Photo preview" style="display:none;" />
-        <div id="no-preview" class="no-preview" style="display:none;">📷</div>
-        <span id="flag-badge" class="flag-badge"></span>
-      </div>
-      <div class="photo-meta">
-        <div class="meta-item"><div class="key">Filename</div><div class="val" id="meta-name">—</div></div>
-        <div class="meta-item"><div class="key">Size</div><div class="val" id="meta-size">—</div></div>
-        <div class="meta-item"><div class="key">Date</div><div class="val" id="meta-date">—</div></div>
-      </div>
-      <div class="label-section">
-        <label for="label-input">Tag it before you keep it (optional — e.g. "dad's birthday", "road trip")</label>
-        <input id="label-input" class="label-input" type="text" placeholder="Type a tag…" maxlength="60" />
-      </div>
-      <div class="action-row">
-        <button id="btn-keep" class="btn-keep">✓ Keep It</button>
-        <button id="btn-delete" class="btn-delete">🗑 Kill It</button>
-      </div>
-      <p class="swipe-hint">← Swipe left to kill it · Swipe right to keep it →</p>
-    </div>
-
-  </main>
-
-  <!-- ══════════════════════════════════════════ -->
-  <!-- SCREEN 3 — GALLERY (all flagged)          -->
-  <!-- ══════════════════════════════════════════ -->
-  <main id="screen-gallery" class="screen">
-
-    <div class="review-header">
-      <button id="btn-gallery-back" class="back-btn">← Back</button>
-      <span class="review-title">🖼 The Flagged Pile</span>
-    </div>
-
-    <div class="gallery-top-bar">
-      <p class="gallery-instructions">
-        Tap a photo to mark it. Tap again to unmark.<br>
-        <strong id="gallery-marked-count">0</strong> marked out of <strong id="gallery-total">0</strong>
-      </p>
-      <button id="btn-select-all" class="btn-select-all">Select All</button>
-    </div>
-
-    <div id="gallery-grid" class="gallery-grid"></div>
-
-    <div class="gallery-footer">
-      <button id="btn-gallery-done" class="btn-primary">Done — nothing marked</button>
-    </div>
-
-  </main>
-
-  <!-- ══════════════════════════════════════════ -->
-  <!-- SCREEN 4 — DONE                           -->
-  <!-- ══════════════════════════════════════════ -->
-  <main id="screen-done" class="screen">
-    <div class="done-screen">
-      <div class="done-icon">🤠</div>
-      <h2>That's a Wrap, Outlaw</h2>
-      <p>Your hit list is below. Head into your Gallery app and pull the trigger — we never touch your files ourselves.</p>
-
-      <div class="stats-row" style="width:100%; max-width:300px; margin-bottom:24px;">
-        <div class="stat-card">
-          <div class="num" id="done-kept">0</div>
-          <div class="lbl">Survivors</div>
-        </div>
-        <div class="stat-card">
-          <div class="num" id="done-deleted">0</div>
-          <div class="lbl">On the hit list</div>
-        </div>
-      </div>
-
-      <div id="deletion-section" style="width:100%; max-width:360px; text-align:left; margin-bottom:24px;">
-        <p class="section-title" style="margin-bottom:10px;">Finish the job in your Gallery app</p>
-        <ul id="deletion-list" style="list-style:none; background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:10px 14px;"></ul>
-      </div>
-
-      <button id="btn-reset" class="btn-primary">🔄 Run It Again</button>
-    </div>
-  </main>
-
-  <!-- ── SCANNING OVERLAY ── -->
-  <div id="scanning-overlay" class="scanning-overlay">
-    <div class="spinner"></div>
-    <div>
-      <strong>Working through your photos…</strong>
-      <p id="scan-msg">Getting started…</p>
+    <div class="fvp-col paid">
+      <h3>Custom Work = Paid</h3>
+      <p>Need it built for YOUR workflow, YOUR data, YOUR problem? That's custom — and that's what you hire me for on Fiverr.</p>
+      <ul>
+        <li>Built to your exact specs</li>
+        <li>Your platform, your data</li>
+        <li>Your timeline, your needs</li>
+        <li>Fast delivery, real communication</li>
+      </ul>
     </div>
   </div>
 
-  <div id="toast" class="toast"></div>
-  <script src="app.js"></script>
+  <div class="svc-grid">
+    <div class="svc reveal">
+      <span class="svc-icon">🐍</span>
+      <h3>Python Automation</h3>
+      <p>Custom scripts that kill repetitive tasks. File movers, schedulers, bots, workflow tools.</p>
+      <span class="svc-tag">Custom = Paid on Fiverr</span>
+      <div class="svc-plats"><span class="plat">Windows</span><span class="plat">Linux</span><span class="plat">Android</span></div>
+    </div>
+    <div class="svc reveal">
+      <span class="svc-icon">🔍</span>
+      <h3>Web Scraping</h3>
+      <p>Pull data from any site. Prices, listings, research. Clean CSV or JSON delivery.</p>
+      <span class="svc-tag">Custom = Paid on Fiverr</span>
+      <div class="svc-plats"><span class="plat">Any Platform</span></div>
+    </div>
+    <div class="svc reveal">
+      <span class="svc-icon">📱</span>
+      <h3>Mobile Scripts</h3>
+      <p>Termux scripts for Android. Shortcuts for iPhone. Real tools for your actual phone.</p>
+      <span class="svc-tag">Custom = Paid on Fiverr</span>
+      <div class="svc-plats"><span class="plat">Android</span><span class="plat">iPhone</span></div>
+    </div>
+    <div class="svc reveal">
+      <span class="svc-icon">🖥️</span>
+      <h3>Desktop Apps</h3>
+      <p>Simple GUI tools anyone can use. One-click programs, launchers, file utilities.</p>
+      <span class="svc-tag">Custom = Paid on Fiverr</span>
+      <div class="svc-plats"><span class="plat">Windows</span><span class="plat">Linux</span><span class="plat">macOS</span></div>
+    </div>
+    <div class="svc reveal">
+      <span class="svc-icon">⚙️</span>
+      <h3>File Utilities</h3>
+      <p>Duplicate finders, photo sorters, batch renamers. Boring stuff automated.</p>
+      <span class="svc-tag">Free tools available too</span>
+      <div class="svc-plats"><span class="plat">All Platforms</span></div>
+    </div>
+    <div class="svc reveal">
+      <span class="svc-icon">🔧</span>
+      <h3>Custom Tooling</h3>
+      <p>Weird problem nobody has a product for? That's my favorite kind. Let's build it.</p>
+      <span class="svc-tag">Let's Talk</span>
+      <div class="svc-plats"><span class="plat">Anything</span></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="chain"></div>
+
+<!-- FREE TOOLS -->
+<div class="sw" id="tools">
+<section>
+  <p class="sec-tag">03 — Free Tools</p>
+  <h2>Open Source. <span class="g">Free.</span> Yours.</h2>
+  <p class="reveal" style="color:var(--dim);max-width:580px;">No subscriptions. No cloud. Your data stays on your machine.</p>
+  <div class="tools reveal">
+    <a href="https://https://github.com/southdreams/dirty-road-deduper" target="_blank" class="tool">
+      <div class="tool-n">01</div>
+      <div class="tool-info"><h3>🗑️ Dirty Road Deduper</h3><p>Find and delete duplicate files. Windows + Android.</p></div>
+      <span class="ttag live">Live</span>
+    </a>
+    <a href="https://https://github.com/southdreams/Southdreams-Photo-Sorter" target="_blank" class="tool">
+      <div class="tool-n">02</div>
+      <div class="tool-info"><h3>📷 Photo Sorter</h3><p>Sort photos by Year / Month / Type. Windows + Android.</p></div>
+      <span class="ttag live">Live</span>
+    </a>
+    <a href="https://https://github.com/southdreams/southdreams-toolkit" target="_blank" class="tool">
+      <div class="tool-n">03</div>
+      <div class="tool-info"><h3>🛠️ SouthDreams Toolkit</h3><p>One GUI launcher for all tools. Windows + Android.</p></div>
+      <span class="ttag live">Live</span>
+    </a>
+    <div class="tool">
+      <div class="tool-n">04</div>
+      <div class="tool-info"><h3>📓 In The Throws of Addiction</h3><p>Raw honest daily journal. No sugarcoating.</p></div>
+      <span class="ttag build">Building</span>
+    </div>
+    <div class="tool">
+      <div class="tool-n">05</div>
+      <div class="tool-info"><h3>📖 My Living Story</h3><p>AI-powered autobiography app. Tell your story.</p></div>
+      <span class="ttag build">Building</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="chain"></div>
+
+<!-- PHILOSOPHY -->
+<div class="sw alt">
+<section>
+  <p class="sec-tag">04 — Philosophy</p>
+  <h2>How We <span class="r">Think.</span></h2>
+  <div class="terminal reveal">
+    <div class="tbar">
+      <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
+      <span class="ttitle">southdreams.conf</span>
+    </div>
+    <div class="tbody">
+      <span class="tc">$ cat southdreams.conf</span><br/><br/>
+      <span class="tg">[core]</span><br/>
+      &nbsp;&nbsp;<span class="tw">hardware</span>&nbsp;&nbsp;<span class="tc">=</span>&nbsp;<span class="tr2">salvaged</span><br/>
+      &nbsp;&nbsp;<span class="tw">software</span>&nbsp;&nbsp;<span class="tc">=</span>&nbsp;<span class="tg">FOSS</span><br/>
+      &nbsp;&nbsp;<span class="tw">cloud</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tc">=</span>&nbsp;<span class="tr2">never</span><br/>
+      &nbsp;&nbsp;<span class="tw">attitude</span>&nbsp;&nbsp;<span class="tc">=</span>&nbsp;<span class="tg">non-conformist</span><br/>
+      &nbsp;&nbsp;<span class="tw">mission</span>&nbsp;&nbsp;&nbsp;<span class="tc">=</span>&nbsp;<span class="tgreen">help the helpless</span><br/><br/>
+      <span class="tg">[team]</span><br/>
+      &nbsp;&nbsp;<span class="tw">founder</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tc">=</span>&nbsp;<span class="tg">Michael Tietsworth</span><br/>
+      &nbsp;&nbsp;<span class="tw">co_owner</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tc">=</span>&nbsp;<span class="tgreen">Ashley Wagoner</span><br/>
+      &nbsp;&nbsp;<span class="tw">soft_rebel_ops</span>&nbsp;&nbsp;<span class="tc">=</span>&nbsp;<span class="tgreen">Ashley Wagoner</span><br/><br/>
+      <span class="tg">[ethos]</span><br/>
+      &nbsp;&nbsp;<span class="tc">"Built dirty. Works clean."</span><br/>
+      &nbsp;&nbsp;<span class="tc">"We help the ones the world tries to forget."</span><br/>
+      &nbsp;&nbsp;<span class="tc">"If the tool doesn't work, we build a bigger one."</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="chain"></div>
+
+<!-- BRANDS -->
+<div class="sw" id="brands">
+<section>
+  <p class="sec-tag">05 — The Brands</p>
+  <h2>Three Brands. <span class="g">One Mission.</span></h2>
+  <div class="brands">
+    <div class="brand b1 reveal">
+      <h3>🔧 Dirty Road Creations</h3>
+      <a href="mailto:dirty@southdreams.com" class="brand-mail">dirty@southdreams.com</a>
+      <p>Python automation and file utilities for everyday people. No subscriptions. No cloud. Built for the ones who just need something that works.</p>
+      <p class="brand-vibe">Practical · Reliable · No Fluff</p>
+      <div class="brand-wm">Dirty</div>
+    </div>
+    <div class="brand b2 reveal">
+      <h3>⚙️ Iron & Ink</h3>
+      <a href="mailto:ink@southdreams.com" class="brand-mail">ink@southdreams.com</a>
+      <p>The edgy branch. Tools and creative assets with attitude. For the rebels, the makers, the ones who do it themselves. EST. 2026.</p>
+      <p class="brand-vibe">Raw · Bold · Unapologetic</p>
+      <div class="brand-wm">Ink</div>
+    </div>
+    <div class="brand b3 reveal">
+      <h3>🤝 Soft Rebel</h3>
+      <a href="mailto:hello@southdreams.com" class="brand-mail">hello@southdreams.com</a>
+      <p>Operated by <strong style="color:#c87898;">Ashley Wagoner</strong> — Co-Owner &amp; Co-Conspirator. Rebels and Outlaws Helping the Helpless. Community first. No judgment.</p>
+      <p class="brand-vibe">Community · Heart · Purpose</p>
+      <div class="brand-wm">Rebel</div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<div class="chain"></div>
+
+<!-- SOFT REBEL STORE -->
+<div class="sw" id="store">
+<section>
+  <p class="sec-tag">06 — Soft Rebel Store</p>
+  <h2>Ashley's <span class="r">Soft Rebel.</span></h2>
+  <p class="reveal" style="color:var(--dim);max-width:600px;margin-bottom:2.5rem;">Run by <strong style="color:#c87898;">Ashley Wagoner</strong> — Co-Owner &amp; Co-Conspirator. Rebels and Outlaws Helping the Helpless. The store is coming soon — here's a taste of what's dropping.</p>
+
+  <div class="sr-grid reveal">
+
+    <div class="sr-card">
+      <div class="sr-img">
+        <div class="sr-ph">🛍️</div>
+      </div>
+      <div class="sr-info">
+        <div class="sr-tag">Coming Soon</div>
+        <h3>Product One</h3>
+        <p>Ashley's first drop. Stay tuned.</p>
+      </div>
+    </div>
+
+    <div class="sr-card">
+      <div class="sr-img">
+        <div class="sr-ph">🛍️</div>
+      </div>
+      <div class="sr-info">
+        <div class="sr-tag">Coming Soon</div>
+        <h3>Product Two</h3>
+        <p>Rebels &amp; Outlaws collection dropping soon.</p>
+      </div>
+    </div>
+
+    <div class="sr-card">
+      <div class="sr-img">
+        <div class="sr-ph">🛍️</div>
+      </div>
+      <div class="sr-info">
+        <div class="sr-tag">Coming Soon</div>
+        <h3>Product Three</h3>
+        <p>For the ones the world tries to forget.</p>
+      </div>
+    </div>
+
+    <div class="sr-card sr-cta-card">
+      <div class="sr-ph-big">🤝</div>
+      <h3>Soft Rebel Store</h3>
+      <p>The full store is on its way. Run by Ashley Wagoner — built with heart, attitude, and purpose.</p>
+      <a href="#" class="btn btn-pink" style="margin-top:1rem;display:inline-block;opacity:.6;cursor:default;">Store Coming Soon</a>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<div class="chain"></div>
+
+<!-- GALLERY PREVIEW -->
+<div class="sw alt" id="gallery">
+<section>
+  <p class="sec-tag">07 — Gallery</p>
+  <h2>Digital Art & <span class="g">Photography.</span></h2>
+  <p class="reveal" style="color:var(--dim);max-width:560px;">Visual work from Iron &amp; Ink. Photography, digital editing, and creative assets.</p>
+  <div class="gal-grid reveal">
+    <div class="gal-item"><div class="gal-ph">📸<br/>Coming<br/>Soon</div></div>
+    <div class="gal-item"><div class="gal-ph">🎨<br/>Coming<br/>Soon</div></div>
+    <div class="gal-item"><div class="gal-ph">📸<br/>Coming<br/>Soon</div></div>
+    <div class="gal-item"><div class="gal-ph">🎨<br/>Coming<br/>Soon</div></div>
+  </div>
+  <div style="margin-top:1.5rem;"><a href="gallery.html" class="btn btn-outline">View Full Gallery →</a></div>
+</section>
+</div>
+
+<div class="chain"></div>
+
+<!-- EXPLORE -->
+<div class="sw" id="pages">
+<section>
+  <p class="sec-tag">08 — Explore</p>
+  <h2>More To <span class="g">Explore.</span></h2>
+  <div class="explore reveal">
+    <a href="gallery.html" class="exp-card">
+      <span class="exp-icon">📸</span>
+      <div class="exp-title">Gallery</div>
+      <div class="exp-desc">Photography, digital art, and creative work from Iron &amp; Ink.</div>
+      <span class="exp-go">Visit Gallery →</span>
+    </a>
+    <a href="blog.html" class="exp-card">
+      <span class="exp-icon">📝</span>
+      <div class="exp-title">Blog</div>
+      <div class="exp-desc">Notes from the terminal. Real talk from a self-taught developer.</div>
+      <span class="exp-go">Read the Blog →</span>
+    </a>
+    <a href="community.html" class="exp-card">
+      <span class="exp-icon">💬</span>
+      <div class="exp-title">Community Wall</div>
+      <div class="exp-desc">Say whatever you want. Public wall. Open to everyone.</div>
+      <span class="exp-go">Join the Conversation →</span>
+    </a>
+    <a href="playground.html" class="exp-card">
+      <span class="exp-icon">🛠️</span>
+      <div class="exp-title">Script Playground</div>
+      <div class="exp-desc">Play with commands, build scripts, learn by doing.</div>
+      <span class="exp-go">Try the Playground →</span>
+    </a>
+  </div>
+</section>
+</div>
+
+<div class="chain"></div>
+
+<!-- CONTACT -->
+<div class="sw alt" id="contact">
+<section>
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <p class="sec-tag">09 — Contact</p>
+      <h2>Let's Build <span class="g">Something.</span></h2>
+      <p>Need a script? Broken workflow? Want something automated? Real people, real budgets. No project too small.</p>
+      <p>I respond. I communicate. I deliver.</p>
+      <div class="emails">
+        <a href="mailto:hello@southdreams.com" class="elink"><span class="ebrand">MAIN</span>hello@southdreams.com</a>
+        <a href="mailto:dirty@southdreams.com" class="elink"><span class="ebrand">DRC</span>dirty@southdreams.com</a>
+        <a href="mailto:ink@southdreams.com" class="elink"><span class="ebrand">I&I</span>ink@southdreams.com</a>
+        <a href="mailto:info@southdreams.com" class="elink"><span class="ebrand">INFO</span>info@southdreams.com</a>
+        <a href="https://https://github.com/southdreams" target="_blank" class="elink"><span class="ebrand">GIT</span>https://github.com/southdreams</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="hire">
+        <h3>Hire Me on Fiverr</h3>
+        <p>Custom scripts built to your exact specs. Fast turnaround. Real communication. You pay for custom work — free tools stay free.</p>
+        <div class="hlist">
+          <span class="hi">Android &amp; iPhone scripts</span>
+          <span class="hi">Windows &amp; Linux automation</span>
+          <span class="hi">Web scraping &amp; data tools</span>
+          <span class="hi">File utilities &amp; organizers</span>
+          <span class="hi">Custom one-off tools</span>
+        </div>
+        <a href="https://www.fiverr.com/southdreams_hq" target="_blank" class="btn btn-red" style="width:100%;text-align:center;display:block;">View Fiverr Gigs →</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="chain"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-skull">☠</div>
+  <div class="foot-title">
+    <span class="f1">South</span>
+    <span class="f2">Dreams</span>
+  </div>
+  <p class="foot-tag">"We help the ones the world tries to forget."</p>
+  <p class="foot-div">☠ ☠ ☠</p>
+  <p>© 2026 SouthDreams · Michael Tietsworth &amp; Ashley Wagoner · Titusville, FL</p>
+  <p>Dirty Road Creations · Iron &amp; Ink · Soft Rebel</p>
+  <p style="margin-top:.3rem;">Built with FOSS · No cloud · No VC · Just builders and a terminal</p>
+</footer>
+
+<!-- MUSIC -->
+<div class="mbar">
+  <button class="mbtn" id="pb" onclick="tp()">▶</button>
+  <div class="mtitle" id="mt">♪ Click play to start music</div>
+  <div class="mprog" onclick="sm(event)">
+    <div class="mfill" id="mf"></div>
+  </div>
+  <div class="mvol">
+    <span>VOL</span>
+    <input type="range" min="0" max="1" step="0.05" value="0.4" oninput="sv(this.value)"/>
+  </div>
+  <span class="mcc">// CC License</span>
+  <audio id="au" loop>
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3" type="audio/mpeg"/>
+  </audio>
+</div>
+
+<script>
+  // Reveal
+  const o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')}),{threshold:.07});
+  document.querySelectorAll('.reveal').forEach(el=>o.observe(el));
+  // Music
+  const au=document.getElementById('au'),pb=document.getElementById('pb'),mf=document.getElementById('mf'),mt=document.getElementById('mt');
+  au.volume=0.4;
+  au.addEventListener('timeupdate',()=>{if(au.duration)mf.style.width=(au.currentTime/au.duration*100)+'%';});
+  au.addEventListener('loadedmetadata',()=>{mt.textContent='♪ Tours — Enthusiast (CC License)';});
+  au.addEventListener('error',()=>{mt.textContent='♪ Add your MP3 to activate player';});
+  function tp(){if(au.paused){au.play().then(()=>pb.textContent='⏸').catch(()=>{mt.textContent='♪ Click play again to start';});}else{au.pause();pb.textContent='▶';}}
+  function sv(v){au.volume=v;}
+  function sm(e){if(!au.duration)return;const r=e.currentTarget.getBoundingClientRect();au.currentTime=((e.clientX-r.left)/r.width)*au.duration;}
+</script>
 </body>
 </html>
