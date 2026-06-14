@@ -1,27 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dirty Road Creations</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dirty Road Creations — Built Dirty. Works Clean.</title>
+  <meta property="og:title" content="Dirty Road Creations" />
+  <meta property="og:description" content="FOSS-first tools built in a home lab on salvaged machines. No subscriptions. No corporate strings. Just tools that work." />
+  <meta property="og:image" content="https://southdreams.github.io/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@300;400;600&family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <header>
-        <h1>Welcome to Dirty Road Creations</h1>
-    </header>
-    <main>
-        <section>
-            <h2>About Us</h2>
-            <p>Here at Dirty Road Creations, we specialize in transforming the ordinary into the extraordinary.</p>
-        </section>
-        <section>
-            <h2>Our Work</h2>
-            <p>Check out our portfolio to see the projects we've worked on!</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Dirty Road Creations</p>
-    </footer>
+  <div class="chain-bar"></div>
+  <nav class="top-nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="SouthDreams" class="nav-logo-img" />
+      <span class="nav-brand">South <em>Dreams</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <span class="nav-divider">✦</span>
+      <a href="iron-ink.html">Iron &amp; Ink</a>
+      <span class="nav-divider">✦</span>
+      <a href="dirty-road.html">Dirty Road</a>
+      <span class="nav-divider">✦</span>
+      <a href="soft-rebel-store.html">Soft Rebel</a>
+      <span class="nav-divider">✦</span>
+      <a href="osint-shield.html">OSINT Shield</a>
+      <span class="nav-divider">✦</span>
+      <a href="mailto:hello@southdreams.com">Contact</a>
+    </div>
+  </nav>
+
+  <header class="brand-hero dirty-hero">
+    <div class="hero-inner">
+      <p class="hero-location">✦ &nbsp;SouthDreams &nbsp;·&nbsp; Titusville, Florida&nbsp; ✦</p>
+      <h1 class="brand-hero-title">Dirty Road <em>Creations</em></h1>
+      <p class="brand-hero-sub">Code replaces assembly lines. Automation replaces overhead. Built in a home lab on salvaged machines.</p>
+      <div class="hero-ctas">
+        <a href="#free-tools" class="cta-primary">Grab Free Tools</a>
+        <a href="#hire" class="cta-secondary">Hire Us</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="chain-bar"></div>
+
+  <section class="about">
+    <div class="section-inner">
+      <h2 class="section-title">Built Dirty. Works Clean.</h2>
+      <p class="about-text">
+        This wasn't built in a boardroom. It was built in a home lab stitched together
+        with salvaged machines and stubborn determination. Old hardware gets a second life here.
+        Code replaces assembly lines. Automation replaces overhead.
+        We don't wait for opportunity. We build it from scraps.
+        Every tool we drop is FOSS-first — free to grab, free to use, free to share.
+        No subscriptions. No accounts. No corporate strings attached.
+      </p>
+    </div>
+  </section>
+
+  <div class="chain-bar"></div>
+
+  <section id="free-tools" class="ecosystem">
+    <div class="section-inner">
+      <h2 class="section-title">Free Tools</h2>
+      <p class="section-sub">No email. No account. No strings. Grab it and go.</p>
+      <div class="eco-grid">
+
+        <div class="eco-card">
+          <div class="eco-card-header dirty">Dirty Road Deduper</div>
+          <p>Thousands of duplicate photos eating your storage? This hunts them down and wipes them out. Fast. Local. Your files never leave your machine. No cloud. No nonsense.</p>
+          <div class="tool-tags">
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">Free</span>
+            <span class="tool-tag">Open Source</span>
+          </div>
+          <a href="https://github.com/southdreams/dirty-road-deduper" target="_blank" rel="noopener" class="eco-link">Grab it on GitHub →</a>
+        </div>
+
+        <div class="eco-card">
+          <div class="eco-card-header dirty">Photo Sorter v2.0</div>
+          <p>Drop it on a folder full of chaos and walk away. It sorts by date, type, or custom rules — automatically. Handles thousands of files without flinching.</p>
+          <div class="tool-tags">
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">Free</span>
+            <span class="tool-tag">Open Source</span>
+          </div>
+          <a href="https://github.com/southdreams/southdreams-photo-sorter" target="_blank" rel="noopener" class="eco-link">Grab it on GitHub →</a>
+        </div>
+
+        <div class="eco-card">
+          <div class="eco-card-header dirty">SouthDreams Toolkit</div>
+          <p>A collection of small, sharp utilities — each one does one thing and does it right. File renaming, batch processing, folder cleanup. The stuff you need but never want to build yourself.</p>
+          <div class="tool-tags">
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">Free</span>
+            <span class="tool-tag">Open Source</span>
+          </div>
+          <a href="https://github.com/southdreams/southdreams-toolkit" target="_blank" rel="noopener" class="eco-link">Grab it on GitHub →</a>
+        </div>
+
+        <div class="eco-card">
+          <div class="eco-card-header dirty">Photo Cleaner PWA</div>
+          <p>No install. No setup. Open it in your browser, drop your photos in, and let it find the near-duplicates you have been ignoring for years. Works on your phone too.</p>
+          <div class="tool-tags">
+            <span class="tool-tag">Web App</span>
+            <span class="tool-tag">Free</span>
+            <span class="tool-tag">No Install</span>
+          </div>
+          <a href="dirty-road-photo-cleaner/index.html" class="eco-link">Open the App →</a>
+        </div>
+
+        <div class="eco-card">
+          <div class="eco-card-header dirty">More Dropping Soon</div>
+          <p>We are always building. New tools get posted to GitHub when they are ready — not before. Follow us there and you will know the minute something new hits.</p>
+          <div class="tool-tags">
+            <span class="tool-tag">Coming Soon</span>
+          </div>
+          <a href="https://github.com/southdreams" target="_blank" rel="noopener" class="eco-link">Follow on GitHub →</a>
+        </div>
+
+        <div class="eco-card">
+          <div class="eco-card-header dirty">Need Something Specific?</div>
+          <p>Got a task eating your time that a machine should be doing? Tell us what it is. We will build it, or we will point you to something that already exists. Either way, you walk away with an answer.</p>
+          <a href="#hire" class="eco-link">Talk to Us →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="chain-bar"></div>
+
+  <!-- GUMROAD PAID TOOLS -->
+  <section class="about" style="background: var(--dark-mid);">
+    <div class="section-inner">
+      <p class="legacy-eyebrow">Pay Once. Own It Forever.</p>
+      <h2 class="section-title">Premium Tools</h2>
+      <p class="about-text">
+        Some tools take longer to build and longer to maintain.
+        Those live on Gumroad — a one time payment, no subscription,
+        no renewal, no gotcha. You pay once and it is yours.
+        Premium tools are coming as we finish building them out.
+        Follow us to know when they drop.
+      </p>
+      <div class="support-block" style="margin-top:30px;">
+        <a href="https://southdreams.gumroad.com" target="_blank" rel="noopener" class="cta-secondary">Browse Gumroad →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="chain-bar"></div>
+
+  <section id="hire" class="legacy">
+    <div class="section-inner">
+      <p class="legacy-eyebrow">Available for Hire</p>
+      <h2 class="section-title">Need Something Built?</h2>
+      <p class="legacy-intro">
+        We don't wait for opportunity. We build it from scraps.
+        If you have got a repetitive task killing your time,
+        a file management nightmare, a process that should be automated
+        but isn't — we take on client work through Fiverr and direct contact.
+        You tell us the problem. We build the solution.
+      </p>
+      <div class="legacy-grid">
+        <div class="legacy-card">
+          <div class="legacy-icon">⚙️</div>
+          <h3 class="legacy-card-title">Python Automation</h3>
+          <p>Stop doing the same thing over and over. We write the script that handles it while you do something worth your time instead.</p>
+          <span class="legacy-status">Starting at $15</span>
+        </div>
+        <div class="legacy-card">
+          <div class="legacy-icon">🗂️</div>
+          <h3 class="legacy-card-title">File &amp; Data Cleanup</h3>
+          <p>Years of digital chaos sorted out fast. We build it, you run it, it handles itself from there. Never touch that mess again.</p>
+          <span class="legacy-status">Starting at $15</span>
+        </div>
+        <div class="legacy-card">
+          <div class="legacy-icon">🔧</div>
+          <h3 class="legacy-card-title">Custom Tools</h3>
+          <p>No tool exists for your problem? We build one. Tight, clean, does exactly what you need and nothing you don't.</p>
+          <span class="legacy-status">Starting at $25</span>
+        </div>
+      </div>
+      <div class="support-block">
+        <p class="support-text">Hit us up on Fiverr or send a message directly. We respond to real requests from real people.</p>
+        <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+          <a href="https://www.fiverr.com/southdreams_hq" target="_blank" rel="noopener" class="support-btn">🛠 Hire on Fiverr</a>
+          <a href="mailto:hello@southdreams.com?subject=Custom Build Request" class="cta-secondary" style="padding:14px 36px;">✉ Send a Message</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="chain-bar"></div>
+
+  <footer class="footer">
+    <img src="logo.png" alt="SouthDreams" class="footer-logo" />
+    <p class="footer-copy">© 2026 Dirty Road Creations — A SouthDreams Brand. Built from scraps. Works like a machine.</p>
+    <div class="footer-links">
+      <a href="index.html">SouthDreams Home</a>
+      <a href="iron-ink.html">Iron &amp; Ink</a>
+      <a href="soft-rebel-store.html">Soft Rebel</a>
+      <a href="osint-shield.html">OSINT Shield</a>
+      <a href="https://github.com/southdreams" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.fiverr.com/southdreams_hq" target="_blank" rel="noopener">Fiverr</a>
+      <a href="https://southdreams.gumroad.com" target="_blank" rel="noopener">Gumroad</a>
+      <a href="mailto:hello@southdreams.com">hello@southdreams.com</a>
+    </div>
+    <p class="footer-manifesto">FOSS · Open Source · Built Dirty · Works Clean</p>
+  </footer>
+  <div class="chain-bar"></div>
 </body>
 </html>
