@@ -91,3 +91,22 @@ body { background: var(--black); color: var(--cream); font-family: var(--font-bo
   .hero-logo { width: 180px; height: 180px; }
   .hero-ctas { flex-direction: column; align-items: center; }
 }
+.whats-new { padding: 80px 20px; background: var(--black); }
+.section-eyebrow { font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 5px; text-transform: uppercase; color: var(--red-bright); text-align: center; margin-bottom: 12px; }
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+.blog-card { background: var(--dark-mid); border: 1px solid #2a2520; border-top: 3px solid var(--red); display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s; }
+.blog-card:hover { border-top-color: var(--gold); transform: translateY(-3px); }
+.blog-card.featured { grid-column: span 3; display: grid; grid-template-columns: 1fr 1fr; border-top: 3px solid var(--gold); }
+.blog-card-img { min-height: 280px; background: var(--dark); background-size: cover; background-position: center; }
+.blog-card-body { padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.blog-tag { font-family: var(--font-ui); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--red-bright); border: 1px solid var(--red); padding: 3px 10px; align-self: flex-start; }
+.blog-card-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--gold); letter-spacing: 1px; line-height: 1.4; }
+.blog-card-text { color: var(--muted); font-size: 0.88rem; line-height: 1.8; flex: 1; }
+.blog-card-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 12px; border-top: 1px solid #2a2520; }
+.blog-date { font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.blog-read-more { font-family: var(--font-ui); font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.2s; }
+.blog-read-more:hover { color: var(--gold-light); }
+.eco-card-header.osint { color: var(--gold-light); }
+.eco-card-header.legacy-brand { color: var(--red-bright); }
+@media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr 1fr; } .blog-card.featured { grid-column: span 2; grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .blog-grid { grid-template-columns: 1fr; } .blog-card.featured { grid-column: span 1; } }
