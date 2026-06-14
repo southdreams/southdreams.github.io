@@ -110,3 +110,17 @@ body { background: var(--black); color: var(--cream); font-family: var(--font-bo
 .eco-card-header.legacy-brand { color: var(--red-bright); }
 @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr 1fr; } .blog-card.featured { grid-column: span 2; grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .blog-grid { grid-template-columns: 1fr; } .blog-card.featured { grid-column: span 1; } }
+.brand-hero { min-height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; position: relative; }
+.iron-hero { background: radial-gradient(ellipse at center top, #3a2a0a 0%, transparent 60%), radial-gradient(ellipse at center, #1a1005 0%, var(--black) 70%); }
+.dirty-hero { background: radial-gradient(ellipse at center top, #0a1a3a 0%, transparent 60%), radial-gradient(ellipse at center, #050f1a 0%, var(--black) 70%); }
+.brand-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 8vw, 5rem); color: var(--cream); letter-spacing: 2px; line-height: 1.1; margin-bottom: 16px; }
+.brand-hero-title em { font-style: normal; color: var(--gold); }
+.brand-hero-sub { font-family: var(--font-ui); font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 30px; }
+.commissions { padding: 80px 20px; background: var(--dark); }
+.commission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 40px 0; }
+.commission-option { background: var(--black); border: 1px solid #2a2520; border-top: 3px solid var(--gold); padding: 24px 20px; }
+.commission-title { font-family: var(--font-display); font-size: 1rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 8px; }
+.commission-price { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 2px; color: var(--red-bright); margin-bottom: 12px; text-transform: uppercase; }
+.commission-option p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; }
+.tool-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.tool-tag { font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 2px 8px; }
