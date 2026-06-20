@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ page.title }} | SouthDreams</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Special+Elite&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sd-bg: #1a1410;
+    --sd-red: #7a1f1f;
+    --sd-gold: #c9a24b;
+    --sd-cream: #f0e6d2;
+  }
+  body {
+    background: var(--sd-bg);
+    color: var(--sd-cream);
+    font-family: 'Oswald', sans-serif;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    line-height: 1.7;
+  }
+  h1 {
+    font-family: 'Rye', serif;
+    color: var(--sd-gold);
+    font-size: 2rem;
+  }
+  .post-meta {
+    font-family: 'Special Elite', monospace;
+    color: var(--sd-red);
+    margin-bottom: 2rem;
+  }
+  .post-content img {
+    width: 100%;
+    border: 2px solid var(--sd-gold);
+    margin: 1.5rem 0;
+    border-radius: 4px;
+  }
+  .divider {
+    text-align: center;
+    color: var(--sd-gold);
+    margin: 2.5rem 0;
+    letter-spacing: 0.5rem;
+  }
+  a.back {
+    color: var(--sd-gold);
+    text-decoration: none;
+    font-family: 'Special Elite', monospace;
+  }
+</style>
+</head>
+<body>
+<article>
+  <h1>{{ page.title }}</h1>
+  <p class="post-meta">{{ page.date | date: "%B %-d, %Y" }} — SouthDreams Stories</p>
+  <div class="post-content">
+    {{ content }}
+  </div>
+  <div class="divider">&#9670;&#9670;&#9670;</div>
+  <a class="back" href="/blog/">&larr; More SouthDreams Stories</a>
+</article>
+</body>
+</html>

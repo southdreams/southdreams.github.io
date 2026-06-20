@@ -1,0 +1,6 @@
+title: SouthDreams
+description: Building things, telling stories, one post at a time.
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+plugins:
+  - jekyll-feed

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog | SouthDreams</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Special+Elite&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sd-bg: #1a1410;
+    --sd-red: #7a1f1f;
+    --sd-gold: #c9a24b;
+    --sd-cream: #f0e6d2;
+  }
+  body {
+    background: var(--sd-bg);
+    color: var(--sd-cream);
+    font-family: 'Oswald', sans-serif;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  h1 {
+    font-family: 'Rye', serif;
+    color: var(--sd-gold);
+  }
+  .post-link {
+    display: block;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--sd-red);
+    text-decoration: none;
+    color: var(--sd-cream);
+  }
+  .post-link h2 {
+    font-family: 'Special Elite', monospace;
+    color: var(--sd-gold);
+    margin: 0 0 0.3rem 0;
+    font-size: 1.2rem;
+  }
+  .post-link span {
+    font-size: 0.85rem;
+    color: var(--sd-red);
+  }
+  a.back {
+    color: var(--sd-gold);
+    text-decoration: none;
+    font-family: 'Special Elite', monospace;
+  }
+</style>
+</head>
+<body>
+<h1>SouthDreams Stories</h1>
+<p>Life, builds, and everything in between.</p>
+
+{% for post in site.posts %}
+<a class="post-link" href="{{ post.url }}">
+  <h2>{{ post.title }}</h2>
+  <span>{{ post.date | date: "%B %-d, %Y" }}</span>
+</a>
+{% endfor %}
+
+<p><a class="back" href="/">&larr; Back to SouthDreams</a></p>
+</body>
+</html>
