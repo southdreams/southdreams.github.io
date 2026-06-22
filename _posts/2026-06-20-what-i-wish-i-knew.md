@@ -6,7 +6,7 @@ date: 2026-06-20
 
 My father died in 2003. I still don't know all the things I wish I knew about him — what his childhood was like, what he felt about things, whether he'd ever even left Pennsylvania, whether he'd ever seen the ocean. Small stuff. The stuff that makes a person a person.
 
-A few years ago I found an old newspaper article online. It was about my dad — getting arrested in Pennsylvania in 1979, nineteen years old, caught with a stash of sawed-off shotguns. The article mentioned he'd been AWOL from the Marines since that June. I learned more about my own father from a stranger's court reporting than I ever got to learn from him directly.
+Not long ago I found a 1974 old newspaper article online. It was about my dad — getting arrested in Pennsylvania when he was just eighteen years old, charged with possessing sawed-off shotguns. The article mentioned he'd also been AWOL from the Marines for several months by the time they picked him up. I learned more about my own father from a stranger's court reporting than I ever got to learn from him directly.
 
 ![Newspaper clipping of my father's 1979 arrest record](REPLACE-WITH-newspaper-clipping.jpg)
 
