@@ -1,324 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soft Rebel — Wear What Feels Like Truth</title>
-  <meta property="og:title" content="Soft Rebel" />
-  <meta property="og:description" content="Biker wear for women who ride hard and live loud. Bold. Fierce. Unapologetic." />
-  <meta property="og:image" content="https://southdreams.github.io/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@300;400;600&family=Special+Elite&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    .sr-hero { background: radial-gradient(ellipse at center top, #3a0a1a 0%, transparent 60%), radial-gradient(ellipse at center, #1a0510 0%, var(--black) 70%); }
-    .sr-hero .brand-hero-title em { color: var(--red-bright); }
-    .store-filter { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
-    .filter-btn { font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--cream); border: 1px solid var(--muted); padding: 8px 18px; background: transparent; cursor: pointer; transition: all 0.2s; }
-    .filter-btn:hover, .filter-btn.active { border-color: var(--gold); color: var(--gold); }
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px; margin-top: 20px; }
-    .product-card { background: var(--dark-mid); border: 1px solid #2a2520; transition: transform 0.2s, border-color 0.2s; position: relative; }
-    .product-card:hover { transform: translateY(-4px); border-color: var(--red); }
-    .product-badge { position: absolute; top: 12px; left: 12px; font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; z-index: 2; }
-    .badge-new { background: var(--red); color: var(--cream); }
-    .badge-hot { background: var(--gold); color: var(--black); }
-    .badge-limited { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
-    .product-img { width: 100%; height: 320px; display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; overflow: hidden; }
-    .product-img-1 { background: linear-gradient(135deg, #1a0810 0%, #2d0f1a 50%, #1a0810 100%); }
-    .product-img-2 { background: linear-gradient(135deg, #0a0a14 0%, #1a1428 50%, #0a0a14 100%); }
-    .product-img-3 { background: linear-gradient(135deg, #0d0d0d 0%, #1a1510 50%, #0d0d0d 100%); }
-    .product-img-4 { background: linear-gradient(135deg, #1a0a05 0%, #2d1a08 50%, #1a0a05 100%); }
-    .product-img-5 { background: linear-gradient(135deg, #0a1010 0%, #0f1f1f 50%, #0a1010 100%); }
-    .product-img-6 { background: linear-gradient(135deg, #14080a 0%, #281015 50%, #14080a 100%); }
-    .product-info { padding: 20px; }
-    .product-category { font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--red-bright); margin-bottom: 8px; }
-    .product-name { font-family: var(--font-display); font-size: 1rem; color: var(--cream); letter-spacing: 1px; margin-bottom: 8px; line-height: 1.3; }
-    .product-desc { font-family: var(--font-body); font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
-    .product-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid #2a2520; }
-    .product-price { font-family: var(--font-ui); font-size: 1.1rem; font-weight: 600; color: var(--gold); letter-spacing: 1px; }
-    .product-price .was { font-size: 0.75rem; color: var(--muted); text-decoration: line-through; margin-right: 6px; }
-    .add-to-cart { font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 10px 18px; background: var(--red); color: var(--cream); border: none; cursor: pointer; transition: background 0.2s; }
-    .add-to-cart:hover { background: var(--red-bright); }
-    .cart-drawer { position: fixed; right: -380px; top: 0; width: 360px; height: 100%; background: var(--dark); border-left: 2px solid var(--red); z-index: 999; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 24px; overflow-y: auto; }
-    .cart-drawer.open { right: 0; }
-    .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #2a2520; }
-    .cart-title { font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); }
-    .cart-close { background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; }
-    .cart-close:hover { color: var(--cream); }
-    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #2a2520; gap: 12px; }
-    .cart-item-name { font-family: var(--font-body); font-size: 0.85rem; color: var(--cream); flex: 1; }
-    .cart-item-price { font-family: var(--font-ui); font-size: 0.85rem; color: var(--gold); white-space: nowrap; }
-    .cart-item-remove { background: none; border: none; color: var(--red); cursor: pointer; font-size: 0.9rem; padding: 0; }
-    .cart-empty { font-family: var(--font-body); color: var(--muted); text-align: center; padding: 40px 0; font-style: italic; }
-    .cart-footer { margin-top: 24px; padding-top: 20px; border-top: 2px solid var(--red); }
-    .cart-total-line { display: flex; justify-content: space-between; font-family: var(--font-ui); font-size: 1rem; font-weight: 600; color: var(--cream); margin-bottom: 16px; letter-spacing: 1px; text-transform: uppercase; }
-    .cart-total-line span:last-child { color: var(--gold); }
-    .checkout-btn { width: 100%; font-family: var(--font-ui); font-size: 0.8rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; padding: 16px; background: var(--gold); color: var(--black); border: none; cursor: pointer; transition: background 0.2s; }
-    .checkout-btn:hover { background: var(--gold-light); }
-    .cart-toggle { position: fixed; bottom: 30px; right: 30px; background: var(--red); color: var(--cream); border: 2px solid var(--gold); width: 60px; height: 60px; border-radius: 50%; font-size: 1.4rem; cursor: pointer; z-index: 998; display: flex; align-items: center; justify-content: center; }
-    .cart-count { position: absolute; top: -4px; right: -4px; background: var(--gold); color: var(--black); font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: none; align-items: center; justify-content: center; }
-    .toast { position: fixed; bottom: 100px; right: 30px; background: var(--dark-mid); border: 1px solid var(--gold); color: var(--cream); font-family: var(--font-ui); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; padding: 12px 20px; opacity: 0; transition: opacity 0.3s; z-index: 997; pointer-events: none; }
-    .toast.show { opacity: 1; }
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 998; display: none; }
-    .overlay.show { display: block; }
-    .promise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 30px; }
-    .promise-item { text-align: center; padding: 20px; }
-    .promise-icon { font-size: 2rem; margin-bottom: 12px; }
-    .promise-title { font-family: var(--font-display); font-size: 0.9rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 8px; }
-    .promise-text { font-family: var(--font-body); font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
-    @media (max-width: 640px) { .cart-drawer { width: 100%; right: -100%; } .product-grid { grid-template-columns: 1fr 1fr; gap: 16px; } .product-img { height: 200px; font-size: 3rem; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soft Rebel — Wear What Feels Like Truth</title>
+<meta name="description" content="Biker wear for women who ride hard and live loud. Bold. Fierce. Unapologetic.">
+<meta property="og:title" content="Soft Rebel">
+<meta property="og:description" content="Biker wear for women who ride hard and live loud. Bold. Fierce. Unapologetic.">
+<meta property="og:image" content="https://southdreams.github.io/logo.png">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#141210;
+    --bg-panel:#1c1917;
+    --ink:#ece5da;
+    --ink-dim:#a89f92;
+    --rust:#b23a2e;
+    --brass:#c9a15a;
+    --line:#3a352f;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,.brand{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 32px;
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-size:1.1rem;}
+  .brand img{height:32px;width:auto;}
+  .brand em{color:var(--rust);font-style:normal;}
+  nav{display:flex;gap:24px;flex-wrap:wrap;font-size:0.9rem;letter-spacing:0.04em;text-transform:uppercase;}
+  nav a{color:var(--ink-dim);transition:color .2s;}
+  nav a:hover, nav a.active{color:var(--brass);}
+
+  .eyebrow{
+    text-align:center;
+    color:var(--brass);
+    font-size:0.8rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    padding-top:36px;
+  }
+  .hero{
+    text-align:center;
+    padding:24px 24px 56px;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4rem);
+    margin:8px 0 18px;
+  }
+  .hero h1 em{color:var(--rust);font-style:normal;}
+  .hero p{color:var(--ink-dim);font-size:1.1rem;max-width:520px;margin:0 auto 28px;}
+  .hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+  .btn{
+    display:inline-block;
+    padding:14px 30px;
+    border-radius:2px;
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-size:0.9rem;
+    transition:transform .15s, background .2s;
+  }
+  .btn-primary{background:var(--rust);color:#fff;}
+  .btn-primary:hover{background:#95291f;transform:translateY(-1px);}
+  .btn-outline{border:1px solid var(--brass);color:var(--brass);}
+  .btn-outline:hover{background:var(--brass);color:var(--bg);}
+
+  section{padding:56px 24px;max-width:1100px;margin:0 auto;}
+  .intro{text-align:center;max-width:680px;color:var(--ink-dim);}
+  .intro h2{color:var(--ink);font-size:1.6rem;margin-bottom:14px;}
+
+  .shop-header{text-align:center;margin-bottom:36px;}
+  .shop-header h2{font-size:2rem;margin-bottom:8px;}
+  .shop-header p{color:var(--ink-dim);}
+
+  .product-wrap{
+    display:flex;
+    justify-content:center;
+  }
+  .product-card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    max-width:340px;
+    width:100%;
+    padding:22px;
+    position:relative;
+    transition:border-color .2s, transform .2s;
+  }
+  .product-card:hover{border-color:var(--brass);transform:translateY(-3px);}
+  .product-tag{
+    position:absolute;
+    top:14px;
+    left:14px;
+    background:var(--rust);
+    color:#fff;
+    font-family:'Oswald',sans-serif;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:4px 10px;
+  }
+  .product-card .thumb{
+    width:100%;
+    aspect-ratio:1/1;
+    background:#0f0d0c;
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2.6rem;
+    margin-bottom:16px;
+    color:var(--brass);
+  }
+  .product-card h3{font-size:1.15rem;margin:0 0 6px;}
+  .product-card .price{color:var(--brass);font-size:1.1rem;font-family:'Oswald',sans-serif;margin-bottom:16px;}
+  .product-card .btn{width:100%;text-align:center;}
+
+  .coming-note{
+    text-align:center;
+    color:var(--ink-dim);
+    font-size:0.95rem;
+    margin-top:28px;
+    padding-top:28px;
+    border-top:1px dashed var(--line);
+  }
+  .coming-note .btn{margin-top:16px;}
+
+  .promise-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:28px;
+    text-align:center;
+  }
+  .promise-grid .icon{font-size:1.8rem;margin-bottom:10px;color:var(--brass);}
+  .promise-grid h3{font-size:1rem;margin-bottom:8px;}
+  .promise-grid p{color:var(--ink-dim);font-size:0.9rem;margin:0;}
+
+  .custom-order{
+    text-align:center;
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    padding:48px 24px;
+  }
+  .custom-order h2{font-size:1.5rem;margin-bottom:12px;}
+  .custom-order p{color:var(--ink-dim);max-width:480px;margin:0 auto 24px;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:36px 24px;
+    text-align:center;
+    color:var(--ink-dim);
+    font-size:0.85rem;
+  }
+  footer img{height:28px;margin:0 auto 14px;}
+  footer nav{justify-content:center;margin-bottom:14px;}
+  footer .tagline{color:var(--brass);letter-spacing:0.08em;text-transform:uppercase;font-size:0.75rem;margin-top:10px;}
+</style>
 </head>
 <body>
-  <div class="chain-bar"></div>
-  <nav class="top-nav">
-    <a href="index.html" class="nav-logo">
-      <img src="logo.png" alt="SouthDreams" class="nav-logo-img" />
-      <span class="nav-brand">South <em>Dreams</em></span>
-    </a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <span class="nav-divider">✦</span>
-      <a href="iron-ink.html">Iron &amp; Ink</a>
-      <span class="nav-divider">✦</span>
-      <a href="dirty-road.html">Dirty Road</a>
-      <span class="nav-divider">✦</span>
-      <a href="soft-rebel-store.html">Soft Rebel</a>
-      <span class="nav-divider">✦</span>
-      <a href="osint-shield.html">OSINT Shield</a>
-      <span class="nav-divider">✦</span>
-      <a href="mailto:hello@southdreams.com">Contact</a>
-    </div>
+
+<header>
+  <a class="brand" href="https://southdreams.com/index.html">
+    <img src="https://southdreams.com/logo.png" alt="SouthDreams">
+    South <em>Dreams</em>
+  </a>
+  <nav>
+    <a href="https://southdreams.com/index.html">Home</a>
+    <a href="https://southdreams.com/iron-ink.html">Iron &amp; Ink</a>
+    <a href="https://southdreams.com/dirty-road.html">Dirty Road</a>
+    <a href="https://southdreams.com/soft-rebel-store.html" class="active">Soft Rebel</a>
+    <a href="https://southdreams.com/osint-shield.html">OSINT Shield</a>
+    <a href="mailto:hello@southdreams.com">Contact</a>
   </nav>
-  <header class="brand-hero sr-hero">
-    <div class="hero-inner">
-      <p class="hero-location">✦ &nbsp;SouthDreams &nbsp;·&nbsp; Co-Founded by Ashley&nbsp; ✦</p>
-      <h1 class="brand-hero-title">Soft <em>Rebel</em></h1>
-      <p class="brand-hero-sub">Stay human. Stay dangerous. Wear what feels like truth.</p>
-      <div class="hero-ctas">
-        <a href="#shop" class="cta-primary">Shop Now</a>
-        <a href="mailto:hello@southdreams.com?subject=Soft Rebel Custom Order" class="cta-secondary">Custom Orders</a>
-      </div>
-    </div>
-  </header>
-  <div class="chain-bar"></div>
-  <section class="about">
-    <div class="section-inner">
-      <h2 class="section-title">For the Women Who Never Apologized.</h2>
-      <p class="about-text">Soft Rebel is for the women who ride hard, live loud, and never once apologized for taking up space. The ones with grease under their nails and lipstick on their collar. The ones who love fierce and hurt deep and get back up every single time. This is not fast fashion. This is not trendy. This is wear that says something about who you are before you open your mouth. Bold. Fierce. Unapologetic. Always.</p>
-    </div>
-  </section>
-  <div class="chain-bar"></div>
-  <section id="shop" class="ecosystem">
-    <div class="section-inner">
-      <h2 class="section-title">The Collection</h2>
-      <div class="store-filter">
-        <button class="filter-btn active" onclick="filterProducts('all',this)">All</button>
-        <button class="filter-btn" onclick="filterProducts('tops',this)">Tops</button>
-        <button class="filter-btn" onclick="filterProducts('bottoms',this)">Bottoms</button>
-        <button class="filter-btn" onclick="filterProducts('leather',this)">Leather</button>
-        <button class="filter-btn" onclick="filterProducts('accessories',this)">Accessories</button>
-        <button class="filter-btn" onclick="filterProducts('sets',this)">Sets</button>
-      </div>
-      <div class="product-grid" id="product-grid">
-        <div class="product-card" data-category="leather">
-          <span class="product-badge badge-hot">Best Seller</span>
-          <div class="product-img product-img-1">🧥</div>
-          <div class="product-info">
-            <p class="product-category">Leather</p>
-            <h3 class="product-name">Outlaw Moto Jacket</h3>
-            <p class="product-desc">Real leather. Heavy hardware. The kind of jacket that gets better every mile you put on it. Cut for women who actually ride.</p>
-            <div class="product-footer">
-              <div class="product-price">$189</div>
-              <button class="add-to-cart" onclick="addToCart('Outlaw Moto Jacket',189)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="tops">
-          <span class="product-badge badge-new">New</span>
-          <div class="product-img product-img-2">👙</div>
-          <div class="product-info">
-            <p class="product-category">Tops</p>
-            <h3 class="product-name">Chain Corset Top</h3>
-            <p class="product-desc">Structured boning. Chain detail at the waist. Wears under a jacket or stands alone. For the nights that become stories.</p>
-            <div class="product-footer">
-              <div class="product-price">$68</div>
-              <button class="add-to-cart" onclick="addToCart('Chain Corset Top',68)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="tops">
-          <div class="product-img product-img-3">🖤</div>
-          <div class="product-info">
-            <p class="product-category">Tops</p>
-            <h3 class="product-name">Rebel Mesh Crop</h3>
-            <p class="product-desc">Sheer mesh. Stretch fit. Wears over a bralette or nothing at all. Not for the faint of heart. Exactly for you.</p>
-            <div class="product-footer">
-              <div class="product-price">$38</div>
-              <button class="add-to-cart" onclick="addToCart('Rebel Mesh Crop',38)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="bottoms">
-          <span class="product-badge badge-new">New</span>
-          <div class="product-img product-img-4">👖</div>
-          <div class="product-info">
-            <p class="product-category">Bottoms</p>
-            <h3 class="product-name">Black Moto Pants</h3>
-            <p class="product-desc">Stretch denim with moto stitching. Fits like it was made for you. Goes from the garage to the bar without blinking.</p>
-            <div class="product-footer">
-              <div class="product-price">$79</div>
-              <button class="add-to-cart" onclick="addToCart('Black Moto Pants',79)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="sets">
-          <span class="product-badge badge-limited">Limited</span>
-          <div class="product-img product-img-5">✨</div>
-          <div class="product-info">
-            <p class="product-category">Sets</p>
-            <h3 class="product-name">Stay Dangerous Set</h3>
-            <p class="product-desc">Lace bralette and high waist brief. Soft against the skin. Dangerous everywhere else. The set you wear when you mean business.</p>
-            <div class="product-footer">
-              <div class="product-price"><span class="was">$72</span>$58</div>
-              <button class="add-to-cart" onclick="addToCart('Stay Dangerous Set',58)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="accessories">
-          <div class="product-img product-img-6">⛓️</div>
-          <div class="product-info">
-            <p class="product-category">Accessories</p>
-            <h3 class="product-name">Barbed Wire Choker</h3>
-            <p class="product-desc">Stainless steel barbed wire design. Sits close to the throat. Delicate enough to be beautiful. Sharp enough to mean something.</p>
-            <div class="product-footer">
-              <div class="product-price">$28</div>
-              <button class="add-to-cart" onclick="addToCart('Barbed Wire Choker',28)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="leather">
-          <div class="product-img product-img-1">🤎</div>
-          <div class="product-info">
-            <p class="product-category">Leather</p>
-            <h3 class="product-name">Rebel Leather Corset</h3>
-            <p class="product-desc">Genuine leather. Steel boning. Lace up back. The kind of piece that takes twenty minutes to put on and makes it worth every second.</p>
-            <div class="product-footer">
-              <div class="product-price">$148</div>
-              <button class="add-to-cart" onclick="addToCart('Rebel Leather Corset',148)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="accessories">
-          <span class="product-badge badge-hot">Fan Favorite</span>
-          <div class="product-img product-img-2">💀</div>
-          <div class="product-info">
-            <p class="product-category">Accessories</p>
-            <h3 class="product-name">Skull &amp; Chain Belt</h3>
-            <p class="product-desc">Heavy chain with skull hardware. Wraps the hips. Wears over everything. The finishing touch that changes the whole outfit.</p>
-            <div class="product-footer">
-              <div class="product-price">$44</div>
-              <button class="add-to-cart" onclick="addToCart('Skull and Chain Belt',44)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="tops">
-          <div class="product-img product-img-3">🔥</div>
-          <div class="product-info">
-            <p class="product-category">Tops</p>
-            <h3 class="product-name">Soft Rebel Bandana Crop</h3>
-            <p class="product-desc">Stretch bandana fabric. Ties at the back. The kind of top that says everything without saying a word. Wear it. Own it.</p>
-            <div class="product-footer">
-              <div class="product-price">$32</div>
-              <button class="add-to-cart" onclick="addToCart('Soft Rebel Bandana Crop',32)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="chain-bar"></div>
-  <section class="about" style="background: var(--dark-mid);">
-    <div class="section-inner">
-      <h2 class="section-title">The Soft Rebel Promise</h2>
-      <div class="promise-grid">
-        <div class="promise-item">
-          <div class="promise-icon">📦</div>
-          <h3 class="promise-title">Ships Fast</h3>
-          <p class="promise-text">Orders processed within 48 hours. Tracked shipping on every order. We know you are not patient and neither are we.</p>
-        </div>
-        <div class="promise-item">
-          <div class="promise-icon">💬</div>
-          <h3 class="promise-title">Real Support</h3>
-          <p class="promise-text">You talk to a human. Not a bot. Not a ticket system. Email us and Ashley will get back to you personally.</p>
-        </div>
-        <div class="promise-item">
-          <div class="promise-icon">🔄</div>
-          <h3 class="promise-title">Easy Returns</h3>
-          <p class="promise-text">Does not fit right? We will make it right. No hassle. No questions designed to make you give up.</p>
-        </div>
-        <div class="promise-item">
-          <div class="promise-icon">🔒</div>
-          <h3 class="promise-title">Secure Checkout</h3>
-          <p class="promise-text">Powered by Stripe. Your payment info is encrypted and never stored. Shop with confidence.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="chain-bar"></div>
-  <section class="about" style="background: var(--red); padding: 50px 20px;">
-    <div class="section-inner">
-      <h2 class="section-title" style="color: var(--cream);">Can't Find What You're Looking For?</h2>
-      <p class="about-text" style="color: rgba(212,197,169,0.85);">We do custom orders. Tell Ashley exactly what you want and we will source it. Nothing off the rack ever fit a rebel right anyway.</p>
-      <div class="support-block" style="margin-top: 30px;">
-        <a href="mailto:hello@southdreams.com?subject=Soft Rebel Custom Order" class="support-btn">✉ Request a Custom Order</a>
-      </div>
-    </div>
-  </section>
-  <div class="chain-bar"></div>
-  <footer class="footer">
-    <img src="logo.png" alt="SouthDreams" class="footer-logo" />
-    <p class="footer-copy">© 2026 Soft Rebel — A SouthDreams Brand. Co-founded by Ashley. Built for women who never apologized.</p>
-    <div class="footer-links">
-      <a href="index.html">SouthDreams Home</a>
-      <a href="iron-ink.html">Iron &amp; Ink</a>
-      <a href="dirty-road.html">Dirty Road Creations</a>
-      <a href="osint-shield.html">OSINT Shield</a>
-      <a href="mailto:hello@southdreams.com">hello@southdreams.com</a>
-    </div>
-    <p class="footer-manifesto">Stay Human · Stay Dangerous · Wear What Feels Like Truth</p>
-  </footer>
-  <div class="chain-bar"></div>
-  <div class="overlay" id="overlay" onclick="closeCart()"></div>
-  <div class="cart-drawer" id="cart-drawer">
-    <div class="cart-header">
-      <h3 class="cart-title">Your Cart</h3>
-      <button class="cart-close" onclick="closeCart()">✕</button>
-    </div>
-    <div class="cart-items" id="cart-items">
-      <p class="cart-empty">Your cart is empty.<br/>Go find something dangerous.</p>
-    </div>
-    <div class="cart-footer" id="cart-footer" style="display:none;">
-      <div class="cart-total-line"><span>Total</span><span id="cart-total">$0</span></div>
-      <button class="checkout-btn" onclick="checkout()">Proceed to Checkout →</button>
+</header>
+
+<div class="eyebrow">SouthDreams · Co-Founded by Ashley</div>
+<section class="hero">
+  <h1>Soft <em>Rebel</em></h1>
+  <p>Stay human. Stay dangerous. Wear what feels like truth.</p>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="#shop">Shop Now</a>
+    <a class="btn btn-outline" href="mailto:hello@southdreams.com?subject=Soft Rebel Custom Order">Custom Orders</a>
+  </div>
+</section>
+
+<section class="intro">
+  <h2>For the Women Who Never Apologized.</h2>
+  <p>Soft Rebel is for the women who ride hard, live loud, and never once apologized for taking up space. The ones with grease under their nails and lipstick on their collar. The ones who love fierce and hurt deep and get back up every single time. This is not fast fashion. This is not trendy. This is wear that says something about who you are before you open your mouth. Bold. Fierce. Unapologetic. Always.</p>
+</section>
+
+<section id="shop">
+  <div class="shop-header">
+    <h2>The Collection</h2>
+    <p>Live now on the Soft Rebel shop. More drops coming as fast as we can build them.</p>
+  </div>
+
+  <div class="product-wrap">
+    <div class="product-card">
+      <span class="product-tag">In Stock</span>
+      <div class="thumb">💀</div>
+      <h3>Rebel Skull Tee — Black</h3>
+      <div class="price">$30.00</div>
+      <a class="btn btn-primary" href="https://southdreams.store/products/rebel-skull-tee-black" target="_blank" rel="noopener">Shop This Piece</a>
     </div>
   </div>
-  <button class="cart-toggle" onclick="toggleCart()" title="View Cart" style="position:fixed;bottom:30px;right:30px;">
-    🛒<span class="cart-count" id="cart-count">0</span>
-  </button>
-  <div class="toast" id="toast">Added to cart</div>
-  <script>
-    let cart=[];
-    function addToCart(name,price){const e=cart.find(i=>i.name===name);if(e){e.qty++;}else{cart.push({name,price,qty:1});}updateCart();showToast(name+' added');openCart();}
-    function removeFromCart(i){cart.splice(i,1);updateCart();}
-    function updateCart(){const el=document.getElementById('cart-items'),tl=document.getElementById('cart-total'),fl=document.getElementById('cart-footer'),cl=document.getElementById('cart-count');if(cart.length===0){el.innerHTML='<p class="cart-empty">Your cart is empty.<br/>Go find something dangerous.</p>';fl.style.display='none';cl.style.display='none';return;}let t=0;el.innerHTML='';cart.forEach((item,i)=>{t+=item.price*item.qty;const d=document.createElement('div');d.className='cart-item';d.innerHTML=`<span class="cart-item-name">${item.name}${item.qty>1?' x'+item.qty:''}</span><span class="cart-item-price">$${(item.price*item.qty).toFixed(2)}</span><button class="cart-item-remove" onclick="removeFromCart(${i})">✕</button>`;el.appendChild(d);});tl.textContent='$'+t.toFixed(2);fl.style.display='block';cl.textContent=cart.reduce((a,i)=>a+i.qty,0);cl.style.display='flex';}
-    function openCart(){document.getElementById('cart-drawer').classList.add('open');document.getElementById('overlay').classList.add('show');}
-    function closeCart(){document.getElementById('cart-drawer').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
-    function toggleCart(){document.getElementById('cart-drawer').classList.contains('open')?closeCart():openCart();}
-    function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-    function checkout(){alert('Checkout coming soon — email hello@southdreams.com to place your order directly for now!');}
-    function filterProducts(cat,btn){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.product-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.category===cat)?'block':'none';});}
-  </script>
+
+  <div class="coming-note">
+    Building out the full lineup — jackets, corsets, chains, the works. Every new piece goes live on the shop first.
+    <br>
+    <a class="btn btn-outline" href="https://southdreams.store/collections/all" target="_blank" rel="noopener">Shop All at southdreams.store →</a>
+  </div>
+</section>
+
+<section>
+  <div class="promise-grid">
+    <div>
+      <div class="icon">📦</div>
+      <h3>Ships Fast</h3>
+      <p>Orders processed within 48 hours. Tracked shipping on every order. We know you are not patient and neither are we.</p>
+    </div>
+    <div>
+      <div class="icon">💬</div>
+      <h3>Real Support</h3>
+      <p>You talk to a human. Not a bot. Not a ticket system. Email us and Ashley will get back to you personally.</p>
+    </div>
+    <div>
+      <div class="icon">🔄</div>
+      <h3>Easy Returns</h3>
+      <p>Does not fit right? We will make it right. No hassle. No questions designed to make you give up.</p>
+    </div>
+    <div>
+      <div class="icon">🔒</div>
+      <h3>Secure Checkout</h3>
+      <p>Checkout runs through Fourthwall, powered by Stripe. Your payment info is encrypted and never touches our hands.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="custom-order">
+    <h2>Can't Find What You're Looking For?</h2>
+    <p>We do custom orders. Tell Ashley exactly what you want and we will source it. Nothing off the rack ever fit a rebel right anyway.</p>
+    <a class="btn btn-primary" href="mailto:hello@southdreams.com?subject=Soft Rebel Custom Order">✉ Request a Custom Order</a>
+  </div>
+</section>
+
+<footer>
+  <img src="https://southdreams.com/logo.png" alt="SouthDreams">
+  <nav>
+    <a href="https://southdreams.com/index.html">SouthDreams Home</a>
+    <a href="https://southdreams.com/iron-ink.html">Iron &amp; Ink</a>
+    <a href="https://southdreams.com/dirty-road.html">Dirty Road Creations</a>
+    <a href="https://southdreams.com/osint-shield.html">OSINT Shield</a>
+    <a href="mailto:hello@southdreams.com">hello@southdreams.com</a>
+  </nav>
+  <div>© 2026 Soft Rebel — A SouthDreams Brand. Co-founded by Ashley. Built for women who never apologized.</div>
+  <div class="tagline">Stay Human · Stay Dangerous · Wear What Feels Like Truth</div>
+</footer>
+
 </body>
 </html>
