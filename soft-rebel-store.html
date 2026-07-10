@@ -1,288 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Soft Rebel — Wear What Feels Like Truth</title>
-<meta name="description" content="Biker wear for women who ride hard and live loud. Bold. Fierce. Unapologetic.">
-<meta property="og:title" content="Soft Rebel">
-<meta property="og:description" content="Biker wear for women who ride hard and live loud. Bold. Fierce. Unapologetic.">
-<meta property="og:image" content="https://southdreams.github.io/logo.png">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#141210;
-    --bg-panel:#1c1917;
-    --ink:#ece5da;
-    --ink-dim:#a89f92;
-    --rust:#b23a2e;
-    --brass:#c9a15a;
-    --line:#3a352f;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    line-height:1.6;
-  }
-  h1,h2,h3,.brand{
-    font-family:'Oswald', sans-serif;
-    text-transform:uppercase;
-    letter-spacing:0.02em;
-  }
-  a{color:inherit;text-decoration:none;}
-  img{max-width:100%;display:block;}
-
-  header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:20px 32px;
-    border-bottom:1px solid var(--line);
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  .brand{display:flex;align-items:center;gap:10px;font-size:1.1rem;}
-  .brand img{height:32px;width:auto;}
-  .brand em{color:var(--rust);font-style:normal;}
-  nav{display:flex;gap:24px;flex-wrap:wrap;font-size:0.9rem;letter-spacing:0.04em;text-transform:uppercase;}
-  nav a{color:var(--ink-dim);transition:color .2s;}
-  nav a:hover, nav a.active{color:var(--brass);}
-
-  .eyebrow{
-    text-align:center;
-    color:var(--brass);
-    font-size:0.8rem;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    padding-top:36px;
-  }
-  .hero{
-    text-align:center;
-    padding:24px 24px 56px;
-    max-width:760px;
-    margin:0 auto;
-  }
-  .hero h1{
-    font-size:clamp(2.4rem, 6vw, 4rem);
-    margin:8px 0 18px;
-  }
-  .hero h1 em{color:var(--rust);font-style:normal;}
-  .hero p{color:var(--ink-dim);font-size:1.1rem;max-width:520px;margin:0 auto 28px;}
-  .hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-
-  .btn{
-    display:inline-block;
-    padding:14px 30px;
-    border-radius:2px;
-    font-family:'Oswald', sans-serif;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    font-size:0.9rem;
-    transition:transform .15s, background .2s;
-  }
-  .btn-primary{background:var(--rust);color:#fff;}
-  .btn-primary:hover{background:#95291f;transform:translateY(-1px);}
-  .btn-outline{border:1px solid var(--brass);color:var(--brass);}
-  .btn-outline:hover{background:var(--brass);color:var(--bg);}
-
-  section{padding:56px 24px;max-width:1100px;margin:0 auto;}
-  .intro{text-align:center;max-width:680px;color:var(--ink-dim);}
-  .intro h2{color:var(--ink);font-size:1.6rem;margin-bottom:14px;}
-
-  .shop-header{text-align:center;margin-bottom:36px;}
-  .shop-header h2{font-size:2rem;margin-bottom:8px;}
-  .shop-header p{color:var(--ink-dim);}
-
-  .product-wrap{
-    display:flex;
-    justify-content:center;
-  }
-  .product-card{
-    background:var(--bg-panel);
-    border:1px solid var(--line);
-    max-width:340px;
-    width:100%;
-    padding:22px;
-    position:relative;
-    transition:border-color .2s, transform .2s;
-  }
-  .product-card:hover{border-color:var(--brass);transform:translateY(-3px);}
-  .product-tag{
-    position:absolute;
-    top:14px;
-    left:14px;
-    background:var(--rust);
-    color:#fff;
-    font-family:'Oswald',sans-serif;
-    font-size:0.7rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    padding:4px 10px;
-  }
-  .product-card .thumb{
-    width:100%;
-    aspect-ratio:1/1;
-    background:#0f0d0c;
-    border:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:2.6rem;
-    margin-bottom:16px;
-    color:var(--brass);
-  }
-  .product-card h3{font-size:1.15rem;margin:0 0 6px;}
-  .product-card .price{color:var(--brass);font-size:1.1rem;font-family:'Oswald',sans-serif;margin-bottom:16px;}
-  .product-card .btn{width:100%;text-align:center;}
-
-  .coming-note{
-    text-align:center;
-    color:var(--ink-dim);
-    font-size:0.95rem;
-    margin-top:28px;
-    padding-top:28px;
-    border-top:1px dashed var(--line);
-  }
-  .coming-note .btn{margin-top:16px;}
-
-  .promise-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
-    gap:28px;
-    text-align:center;
-  }
-  .promise-grid .icon{font-size:1.8rem;margin-bottom:10px;color:var(--brass);}
-  .promise-grid h3{font-size:1rem;margin-bottom:8px;}
-  .promise-grid p{color:var(--ink-dim);font-size:0.9rem;margin:0;}
-
-  .custom-order{
-    text-align:center;
-    background:var(--bg-panel);
-    border:1px solid var(--line);
-    padding:48px 24px;
-  }
-  .custom-order h2{font-size:1.5rem;margin-bottom:12px;}
-  .custom-order p{color:var(--ink-dim);max-width:480px;margin:0 auto 24px;}
-
-  footer{
-    border-top:1px solid var(--line);
-    padding:36px 24px;
-    text-align:center;
-    color:var(--ink-dim);
-    font-size:0.85rem;
-  }
-  footer img{height:28px;margin:0 auto 14px;}
-  footer nav{justify-content:center;margin-bottom:14px;}
-  footer .tagline{color:var(--brass);letter-spacing:0.08em;text-transform:uppercase;font-size:0.75rem;margin-top:10px;}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soft Rebel — Wear What Feels Like Truth</title>
+  <meta property="og:title" content="Soft Rebel" />
+  <meta property="og:description" content="Biker wear for women who ride hard and live loud. Bold. Fierce. Unapologetic." />
+  <meta property="og:image" content="https://southdreams.github.io/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@300;400;600&family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .rebel-hero { background: radial-gradient(ellipse at center top, #3a0a1a 0%, transparent 60%), radial-gradient(ellipse at center, #1a0510 0%, var(--black) 70%); }
+    .product-wrap { display: flex; justify-content: center; margin-top: 20px; }
+    .product-card { max-width: 320px; width: 100%; }
+    .product-card .eco-card-header { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-family: var(--font-ui); font-size: 1rem; color: var(--gold); letter-spacing: 1px; }
+    .product-thumb { width: 100%; aspect-ratio: 1/1; background: var(--black); border: 1px solid #2a2520; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: 18px; }
+    .shop-more-note { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 36px; padding-top: 30px; border-top: 1px dashed #2a2520; }
+    .shop-more-note .cta-secondary { margin-top: 18px; display: inline-block; }
+  </style>
 </head>
 <body>
-
-<header>
-  <a class="brand" href="https://southdreams.com/index.html">
-    <img src="https://southdreams.com/logo.png" alt="SouthDreams">
-    South <em>Dreams</em>
-  </a>
-  <nav>
-    <a href="https://southdreams.com/index.html">Home</a>
-    <a href="https://southdreams.com/iron-ink.html">Iron &amp; Ink</a>
-    <a href="https://southdreams.com/dirty-road.html">Dirty Road</a>
-    <a href="https://southdreams.com/soft-rebel-store.html" class="active">Soft Rebel</a>
-    <a href="https://southdreams.com/osint-shield.html">OSINT Shield</a>
-    <a href="mailto:hello@southdreams.com">Contact</a>
+  <div class="chain-bar"></div>
+  <nav class="top-nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="SouthDreams" class="nav-logo-img" />
+      <span class="nav-brand">South <em>Dreams</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <span class="nav-divider">✦</span>
+      <a href="iron-ink.html">Iron &amp; Ink</a>
+      <span class="nav-divider">✦</span>
+      <a href="dirty-road.html">Dirty Road</a>
+      <span class="nav-divider">✦</span>
+      <a href="soft-rebel-store.html">Soft Rebel</a>
+      <span class="nav-divider">✦</span>
+      <a href="osint-shield.html">OSINT Shield</a>
+      <span class="nav-divider">✦</span>
+      <a href="mailto:hello@southdreams.com">Contact</a>
+    </div>
   </nav>
-</header>
 
-<div class="eyebrow">SouthDreams · Co-Founded by Ashley</div>
-<section class="hero">
-  <h1>Soft <em>Rebel</em></h1>
-  <p>Stay human. Stay dangerous. Wear what feels like truth.</p>
-  <div class="hero-ctas">
-    <a class="btn btn-primary" href="#shop">Shop Now</a>
-    <a class="btn btn-outline" href="mailto:hello@southdreams.com?subject=Soft Rebel Custom Order">Custom Orders</a>
-  </div>
-</section>
-
-<section class="intro">
-  <h2>For the Women Who Never Apologized.</h2>
-  <p>Soft Rebel is for the women who ride hard, live loud, and never once apologized for taking up space. The ones with grease under their nails and lipstick on their collar. The ones who love fierce and hurt deep and get back up every single time. This is not fast fashion. This is not trendy. This is wear that says something about who you are before you open your mouth. Bold. Fierce. Unapologetic. Always.</p>
-</section>
-
-<section id="shop">
-  <div class="shop-header">
-    <h2>The Collection</h2>
-    <p>Live now on the Soft Rebel shop. More drops coming as fast as we can build them.</p>
-  </div>
-
-  <div class="product-wrap">
-    <div class="product-card">
-      <span class="product-tag">In Stock</span>
-      <div class="thumb">💀</div>
-      <h3>Rebel Skull Tee — Black</h3>
-      <div class="price">$30.00</div>
-      <a class="btn btn-primary" href="https://southdreams.store/products/rebel-skull-tee-black" target="_blank" rel="noopener">Shop This Piece</a>
+  <header class="brand-hero rebel-hero">
+    <div class="hero-inner">
+      <p class="hero-location">✦ &nbsp;SouthDreams &nbsp;·&nbsp; Co-Founded by Ashley&nbsp; ✦</p>
+      <h1 class="brand-hero-title">Soft <em>Rebel</em></h1>
+      <p class="brand-hero-sub">Stay human. Stay dangerous. Wear what feels like truth.</p>
+      <div class="hero-ctas">
+        <a href="#shop" class="cta-primary">Shop Now</a>
+        <a href="mailto:hello@southdreams.com?subject=Soft Rebel Custom Order" class="cta-secondary">Custom Orders</a>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div class="coming-note">
-    Building out the full lineup — jackets, corsets, chains, the works. Every new piece goes live on the shop first.
-    <br>
-    <a class="btn btn-outline" href="https://southdreams.store/collections/all" target="_blank" rel="noopener">Shop All at southdreams.store →</a>
-  </div>
-</section>
+  <div class="chain-bar"></div>
 
-<section>
-  <div class="promise-grid">
-    <div>
-      <div class="icon">📦</div>
-      <h3>Ships Fast</h3>
-      <p>Orders processed within 48 hours. Tracked shipping on every order. We know you are not patient and neither are we.</p>
+  <section class="about">
+    <div class="section-inner">
+      <h2 class="section-title">For the Women Who Never Apologized.</h2>
+      <p class="about-text">
+        Soft Rebel is for the women who ride hard, live loud, and never once apologized
+        for taking up space. The ones with grease under their nails and lipstick on their collar.
+        The ones who love fierce and hurt deep and get back up every single time.
+        This is not fast fashion. This is not trendy. This is wear that says something
+        about who you are before you open your mouth. Bold. Fierce. Unapologetic. Always.
+      </p>
     </div>
-    <div>
-      <div class="icon">💬</div>
-      <h3>Real Support</h3>
-      <p>You talk to a human. Not a bot. Not a ticket system. Email us and Ashley will get back to you personally.</p>
-    </div>
-    <div>
-      <div class="icon">🔄</div>
-      <h3>Easy Returns</h3>
-      <p>Does not fit right? We will make it right. No hassle. No questions designed to make you give up.</p>
-    </div>
-    <div>
-      <div class="icon">🔒</div>
-      <h3>Secure Checkout</h3>
-      <p>Checkout runs through Fourthwall, powered by Stripe. Your payment info is encrypted and never touches our hands.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="custom-order">
-    <h2>Can't Find What You're Looking For?</h2>
-    <p>We do custom orders. Tell Ashley exactly what you want and we will source it. Nothing off the rack ever fit a rebel right anyway.</p>
-    <a class="btn btn-primary" href="mailto:hello@southdreams.com?subject=Soft Rebel Custom Order">✉ Request a Custom Order</a>
-  </div>
-</section>
+  <div class="chain-bar"></div>
 
-<footer>
-  <img src="https://southdreams.com/logo.png" alt="SouthDreams">
-  <nav>
-    <a href="https://southdreams.com/index.html">SouthDreams Home</a>
-    <a href="https://southdreams.com/iron-ink.html">Iron &amp; Ink</a>
-    <a href="https://southdreams.com/dirty-road.html">Dirty Road Creations</a>
-    <a href="https://southdreams.com/osint-shield.html">OSINT Shield</a>
-    <a href="mailto:hello@southdreams.com">hello@southdreams.com</a>
-  </nav>
-  <div>© 2026 Soft Rebel — A SouthDreams Brand. Co-founded by Ashley. Built for women who never apologized.</div>
-  <div class="tagline">Stay Human · Stay Dangerous · Wear What Feels Like Truth</div>
-</footer>
+  <section id="shop" class="ecosystem">
+    <div class="section-inner">
+      <h2 class="section-title">The Collection</h2>
+      <p class="section-sub">Live now on the Soft Rebel shop. More drops coming as fast as we can build them.</p>
 
+      <div class="product-wrap">
+        <div class="eco-card product-card">
+          <div class="eco-card-header rebel">
+            <span>Rebel Skull Tee — Black</span>
+          </div>
+          <div class="product-thumb">💀</div>
+          <div class="product-price">$30.00</div>
+          <p style="margin-top:10px;">Classic fit. Heavyweight cotton. The skull doesn't ask permission and neither do you.</p>
+          <a href="https://southdreams.store/products/rebel-skull-tee-black" target="_blank" rel="noopener" class="eco-link">Shop This Piece →</a>
+        </div>
+      </div>
+
+      <div class="shop-more-note">
+        Building out the full lineup — jackets, corsets, chains, the works.
+        Every new piece goes live on the shop first.
+        <br>
+        <a href="https://southdreams.store/collections/all" target="_blank" rel="noopener" class="cta-secondary">Shop All at southdreams.store →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="chain-bar"></div>
+
+  <section class="legacy">
+    <div class="section-inner">
+      <p class="legacy-eyebrow">Why Ride With Us</p>
+      <h2 class="section-title">The Promise</h2>
+      <div class="legacy-grid">
+        <div class="legacy-card">
+          <div class="legacy-icon">📦</div>
+          <h3 class="legacy-card-title">Ships Fast</h3>
+          <p>Orders processed within 48 hours. Tracked shipping on every order. We know you are not patient and neither are we.</p>
+        </div>
+        <div class="legacy-card">
+          <div class="legacy-icon">💬</div>
+          <h3 class="legacy-card-title">Real Support</h3>
+          <p>You talk to a human. Not a bot. Not a ticket system. Email us and Ashley will get back to you personally.</p>
+        </div>
+        <div class="legacy-card">
+          <div class="legacy-icon">🔄</div>
+          <h3 class="legacy-card-title">Easy Returns</h3>
+          <p>Does not fit right? We will make it right. No hassle. No questions designed to make you give up.</p>
+        </div>
+        <div class="legacy-card">
+          <div class="legacy-icon">🔒</div>
+          <h3 class="legacy-card-title">Secure Checkout</h3>
+          <p>Checkout runs through Fourthwall, powered by Stripe. Your payment info is encrypted and never touches our hands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="chain-bar"></div>
+
+  <section class="about" style="background: var(--dark-mid);">
+    <div class="section-inner">
+      <p class="legacy-eyebrow">Not Off the Rack</p>
+      <h2 class="section-title">Can't Find What You're Looking For?</h2>
+      <p class="about-text">
+        We do custom orders. Tell Ashley exactly what you want and we will source it.
+        Nothing off the rack ever fit a rebel right anyway.
+      </p>
+      <div class="support-block" style="margin-top:30px;">
+        <a href="mailto:hello@southdreams.com?subject=Soft Rebel Custom Order" class="support-btn">✉ Request a Custom Order</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="chain-bar"></div>
+
+  <footer class="footer">
+    <img src="logo.png" alt="SouthDreams" class="footer-logo" />
+    <p class="footer-copy">© 2026 Soft Rebel — A SouthDreams Brand. Co-founded by Ashley. Built for women who never apologized.</p>
+    <div class="footer-links">
+      <a href="index.html">SouthDreams Home</a>
+      <a href="iron-ink.html">Iron &amp; Ink</a>
+      <a href="dirty-road.html">Dirty Road Creations</a>
+      <a href="osint-shield.html">OSINT Shield</a>
+      <a href="https://southdreams.store" target="_blank" rel="noopener">Full Shop</a>
+      <a href="mailto:hello@southdreams.com">hello@southdreams.com</a>
+    </div>
+    <p class="footer-manifesto">Stay Human · Stay Dangerous · Wear What Feels Like Truth</p>
+  </footer>
+  <div class="chain-bar"></div>
 </body>
 </html>
