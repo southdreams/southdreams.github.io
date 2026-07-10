@@ -6,13 +6,13 @@ date: 2026-06-20
 
 My father died in 2003. I still don't know all the things I wish I knew about him — what his childhood was like, what he felt about things, whether he'd ever even left Pennsylvania, whether he'd ever seen the ocean. Small stuff. The stuff that makes a person a person.
 
-A few years ago I found an old newspaper article online. It was about my dad — getting arrested in Pennsylvania in 1979, nineteen years old, caught with a stash of sawed-off shotguns. The article mentioned he'd been AWOL from the Marines since that June. I learned more about my own father from a stranger's court reporting than I ever got to learn from him directly.
+Not long ago I found a 1974 old newspaper article online. It was about my dad — getting arrested in Pennsylvania when he was just eighteen years old, charged with possessing sawed-off shotguns. The article mentioned he'd also been AWOL from the Marines for several months by the time they picked him up. I learned more about my own father from a stranger's court reporting than I ever got to learn from him directly.
 
-![Newspaper clipping of my father's 1979 arrest record](REPLACE-WITH-newspaper-clipping.jpg)
+!![Newspaper clipping - Held On Gun Charge, York Daily Record](/images/dad-newspaper-clipping.jpg)
 
 Along with the article, I found his high school picture too. He looks so much like me at that same age it's almost unsettling. I have both images saved now — the clipping and his photo. Funny thing is, I don't think I even have a picture of myself at nineteen. He's better documented at that age than I am.
 
-![My father's high school photo](REPLACE-WITH-dad-highschool-photo.jpg)
+!![My father's high school photo](/images/dad-highschool-photo.jpg)
 
 That's part of why I'm doing this. I don't want my kids, or anyone who ever wants to actually know me, to have to go digging through old records someday hoping to find a few scraps. I want to just tell them. The real stuff — the things I should've said out loud, the things I felt, the things I wanted, the crazy life I've actually lived. I want people to be able to read it and see me. The ones who were there can remember it with me. The ones who weren't can live through it a little, vicariously, through all the chaos.
 
